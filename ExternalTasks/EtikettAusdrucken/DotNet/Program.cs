@@ -48,7 +48,7 @@
                 Console.WriteLine("");
 
 
-                Console.WriteLine($"Warte für {WAIT_TIMEOUT} Sekunden.");
+                Console.WriteLine($"Warte für {WAIT_TIMEOUT} Millisekunden.");
                 await Task.Delay(WAIT_TIMEOUT);
 
                 Console.WriteLine("Bearbeitung fertig!");

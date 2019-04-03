@@ -1,0 +1,17 @@
+{
+  "name": "etikett_ausdrucken_external_task",
+  "version": "1.0.0",
+  "description": "Der Client zum Ausführen des Task für 'Etikett drucken'",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "author": "Martin Moellenbeck <Martin.Moellenbeck@5Minds.de>",
+  "license": "MIT",
+  "dependencies": {
+    "@essential-projects/http": "^2.3.1",
+    "@process-engine/external_task_api_client": "^1.0.6",
+    "@process-engine/external_task_api_contracts": "^1.0.5",
+    "moment": "^2.24.0"
+  }
+}
