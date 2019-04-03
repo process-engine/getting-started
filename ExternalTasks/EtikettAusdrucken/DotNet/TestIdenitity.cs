@@ -2,14 +2,10 @@ namespace EtikettAusdrucken
 {
     using System;
 
-    using Foundation.IAM.Contracts;
-    
+    using ProcessEngine.ExternalTaskAPI.Contracts;
 
     internal class TestIdentity: IIdentity
     {
-        public override string ToString()
-        {
-            return "ZHVtbXlfdG9rZW4=";
-        }
+        public string Token => "ZHVtbXlfdG9rZW4=";
     }
 }
