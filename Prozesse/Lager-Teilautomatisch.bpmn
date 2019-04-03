@@ -1,28 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definition_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="BPMN Studio" exporterVersion="1">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definition_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="BPMN Studio" exporterVersion="1">
   <bpmn:collaboration id="Collaboration_0vfybz6" name="">
-    <bpmn:participant id="Participant_0svu5es" name="Lager-Teilautomatisch" processRef="Lager-Manuell (1)" />
+    <bpmn:participant id="Participant_0svu5es" name="Lager-Teilautomatisch" processRef="Lager-Teilautomatisch" />
   </bpmn:collaboration>
-  <bpmn:process id="Lager-Manuell (1)" name="" isExecutable="true">
+  <bpmn:process id="Lager-Teilautomatisch" name="" isExecutable="true">
     <bpmn:laneSet id="LaneSet_0u00mji">
       <bpmn:lane id="Lane_071kkxj" name="Kommissionierer">
         <bpmn:flowNodeRef>Task_0b2d921</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_1phdfxy</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0u6o9rc</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_1enelz7</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>StartEvent_0xy0nrz</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_19i4pvh</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0qq1cq3</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_156lvk0</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_1phdfxy</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:task id="Task_0b2d921" name="Etikett auskleben">
       <bpmn:incoming>SequenceFlow_1q0qfdz</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0w2e7w7</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:task id="Task_1phdfxy" name="Etikett ausdrucken">
-      <bpmn:incoming>SequenceFlow_00cq7sj</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1q0qfdz</bpmn:outgoing>
     </bpmn:task>
     <bpmn:task id="Task_0u6o9rc" name="Paket versenden">
       <bpmn:incoming>SequenceFlow_0w2e7w7</bpmn:incoming>
@@ -53,6 +49,13 @@
     <bpmn:sequenceFlow id="SequenceFlow_1t0hdgs" name="" sourceRef="Task_156lvk0" targetRef="Task_0qq1cq3" />
     <bpmn:sequenceFlow id="SequenceFlow_1kq2vuh" sourceRef="Task_19i4pvh" targetRef="Task_156lvk0" />
     <bpmn:sequenceFlow id="SequenceFlow_0ztryxm" sourceRef="StartEvent_0xy0nrz" targetRef="Task_19i4pvh" />
+    <bpmn:serviceTask id="Task_1phdfxy" name="Etikett ausdrucken" camunda:type="external" camunda:topic="Etikett-ausdrucken">
+      <bpmn:extensionElements>
+        <camunda:properties />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_00cq7sj</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1q0qfdz</bpmn:outgoing>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0vfybz6">
@@ -64,9 +67,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_0b2d921_di" bpmnElement="Task_0b2d921">
         <dc:Bounds x="697" y="71" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_1phdfxy_di" bpmnElement="Task_1phdfxy">
-        <dc:Bounds x="527" y="71" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_0u6o9rc_di" bpmnElement="Task_0u6o9rc">
         <dc:Bounds x="867" y="71" width="100" height="80" />
@@ -120,6 +120,9 @@
         <di:waypoint x="-53" y="111" />
         <di:waypoint x="26" y="111" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_1aorxtc_di" bpmnElement="Task_1phdfxy">
+        <dc:Bounds x="527" y="71" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

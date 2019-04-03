@@ -12,6 +12,16 @@
 
     class Program
     {
+
+        static Uri ProcessEngineBaseUri = new Uri("http://localhost:8000");
+
+        const string TOPIC = "Etikett-ausdrucken";
+
+        const int MAX_TASKS = 10;
+
+        const int POLLING_TIMEOUT = 1000;
+        const int WAIT_TIMEOUT = 40000;
+
         static void Main(string[] args)
         {
             RunWorker().GetAwaiter().GetResult();
@@ -22,17 +32,24 @@
             IIdentity identity = new TestIdentity();
             HttpClient client = new HttpClient();
 
-            client.BaseAddress = new Uri("http://localhost:8000");
+            client.BaseAddress = Program.ProcessEngineBaseUri;
 
             IExternalTaskAPI externalTaskApi = new ExternalTaskApiClientService(client);
             ExternalTaskWorker externalTaskWorker = new ExternalTaskWorker(externalTaskApi);
 
-            await externalTaskWorker.WaitForHandle<TestPayload>(identity, "TestTopic", 10, 10000, async (externalTask) =>
+            Console.WriteLine("Waiting for process-engine-tasks.");
+
+            await externalTaskWorker.WaitForHandle<TestPayload>(identity, TOPIC, MAX_TASKS, POLLING_TIMEOUT, async (externalTask) =>
             {
-                Console.WriteLine(JsonConvert.SerializeObject(externalTask));
+                Console.Write("PAYLOAD: ");
+                Console.Write(JsonConvert.SerializeObject(externalTask));
+                Console.WriteLine("");
 
-                await Task.Delay(40000);
 
+                Console.WriteLine($"Waitung for {WAIT_TIMEOUT} seconds.");
+                await Task.Delay(WAIT_TIMEOUT);
+
+                Console.WriteLine("Work done!");
                 return new ExternalTaskFinished<TestResult>(externalTask.Id, new TestResult());
             });
         }    
