@@ -8,7 +8,7 @@
       <bpmn:lane id="Lane_071kkxj" name="Kommissionierer">
         <bpmn:flowNodeRef>Task_0b2d921</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0u6o9rc</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>EndEvent_1enelz7</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>VersandauftragVersendet</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>VersandauftragErhalten</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_19i4pvh</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0qq1cq3</bpmn:flowNodeRef>
@@ -24,7 +24,7 @@
       <bpmn:incoming>SequenceFlow_0w2e7w7</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1351myl</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:endEvent id="EndEvent_1enelz7" name="Versandauftrag versendet">
+    <bpmn:endEvent id="VersandauftragVersendet" name="Versandauftrag versendet">
       <bpmn:incoming>SequenceFlow_1351myl</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:startEvent id="VersandauftragErhalten" name="Versandauftrag erhalten">
@@ -42,7 +42,7 @@
       <bpmn:incoming>SequenceFlow_1kq2vuh</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1t0hdgs</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:sequenceFlow id="SequenceFlow_1351myl" sourceRef="Task_0u6o9rc" targetRef="EndEvent_1enelz7" />
+    <bpmn:sequenceFlow id="SequenceFlow_1351myl" sourceRef="Task_0u6o9rc" targetRef="VersandauftragVersendet" />
     <bpmn:sequenceFlow id="SequenceFlow_0w2e7w7" sourceRef="Task_0b2d921" targetRef="Task_0u6o9rc" />
     <bpmn:sequenceFlow id="SequenceFlow_00cq7sj" sourceRef="Task_0qq1cq3" targetRef="Task_1phdfxy" />
     <bpmn:sequenceFlow id="SequenceFlow_1q0qfdz" sourceRef="Task_1phdfxy" targetRef="Task_0b2d921" />
@@ -71,7 +71,7 @@
       <bpmndi:BPMNShape id="Task_0u6o9rc_di" bpmnElement="Task_0u6o9rc">
         <dc:Bounds x="867" y="71" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="EndEvent_1enelz7_di" bpmnElement="EndEvent_1enelz7">
+      <bpmndi:BPMNShape id="EndEvent_1enelz7_di" bpmnElement="VersandauftragVersendet">
         <dc:Bounds x="1037" y="93" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1018" y="136" width="75" height="27" />

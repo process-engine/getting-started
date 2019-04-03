@@ -20,7 +20,7 @@
         const int MAX_TASKS = 10;
 
         const int POLLING_TIMEOUT = 1000;
-        const int WAIT_TIMEOUT = 40000;
+        const int WAIT_TIMEOUT = 10000;
 
         static void Main(string[] args)
         {
@@ -37,19 +37,21 @@
             IExternalTaskAPI externalTaskApi = new ExternalTaskApiClientService(client);
             ExternalTaskWorker externalTaskWorker = new ExternalTaskWorker(externalTaskApi);
 
-            Console.WriteLine("Waiting for process-engine-tasks.");
+            Console.WriteLine($"Warten auf Aufgaben für das Topic '{TOPIC}'.");
 
             await externalTaskWorker.WaitForHandle<TestPayload>(identity, TOPIC, MAX_TASKS, POLLING_TIMEOUT, async (externalTask) =>
             {
-                Console.Write("PAYLOAD: ");
+                Console.WriteLine("");
+                Console.Write("Daten: ");
                 Console.Write(JsonConvert.SerializeObject(externalTask));
+                Console.WriteLine("");
                 Console.WriteLine("");
 
 
-                Console.WriteLine($"Waitung for {WAIT_TIMEOUT} seconds.");
+                Console.WriteLine($"Warte für {WAIT_TIMEOUT} Sekunden.");
                 await Task.Delay(WAIT_TIMEOUT);
 
-                Console.WriteLine("Work done!");
+                Console.WriteLine("Bearbeitung fertig!");
                 return new ExternalTaskFinished<TestResult>(externalTask.Id, new TestResult());
             });
         }    

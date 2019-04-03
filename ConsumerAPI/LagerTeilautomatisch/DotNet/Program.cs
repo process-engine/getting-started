@@ -17,7 +17,9 @@
         static Uri ProcessEngineBaseUri = new Uri("http://localhost:8000");
 
         const string PROCESS_MODEL_ID= "Lager-Teilautomatisch";
-        const string START_EVENT_KEY = "VersandauftragErhalten";
+        const string START_EVENT_ID = "VersandauftragErhalten";
+
+        const string END_EVENT_ID = "VersandauftragVersendet";
 
         static void Main(string[] args)
         {
@@ -37,7 +39,19 @@
             var processStartPayload = new ProcessStartRequestPayload<StartPayload>();
             processStartPayload.InputValues = startPayload;
 
-            var result = await client.StartProcessInstance<StartPayload>(identity, PROCESS_MODEL_ID, START_EVENT_KEY, processStartPayload);
+            Console.WriteLine($"Prozess gestartet '{PROCESS_MODEL_ID}' beim Start-Event '{START_EVENT_ID}'.");
+
+            var result = await client.StartProcessInstance<StartPayload>(
+                identity, 
+                PROCESS_MODEL_ID, 
+                START_EVENT_ID, 
+                processStartPayload, 
+                StartCallbackType.CallbackOnEndEventReached,
+                END_EVENT_ID);
+
+            Console.WriteLine($"Prozess beendet (CorrelationId: '{result.CorrelationId}').");
+            Console.Write("Daten: ");
+            Console.WriteLine(result.TokenPayload);
         }
 
         static internal IIdentity CreateIdentity() 
