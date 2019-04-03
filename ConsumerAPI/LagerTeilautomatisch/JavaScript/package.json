@@ -1,0 +1,17 @@
+{
+  "name": "consumer_api_sample",
+  "version": "1.0.0",
+  "description": "Ein Beispiel für die Verwendung der ConsumerAPI zum Starten eines Prozesses",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Martin Moellenbeck <Martin.Moellenbeck@5Minds.de>",
+  "license": "MIT",
+  "dependencies": {
+    "@essential-projects/http": "^2.3.1",
+    "@essential-projects/iam_contracts": "^3.4.2",
+    "@process-engine/consumer_api_client": "^5.0.0",
+    "@process-engine/consumer_api_contracts": "^5.1.1"
+  }
+}
