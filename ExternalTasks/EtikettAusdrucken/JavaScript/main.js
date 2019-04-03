@@ -19,13 +19,6 @@ const MAX_TASKS = 10;
 const POLLING_TIMEOUT = 1000;
 const WAIT_TIMEOUT = 10000;
 
-const httpClient = new HttpClient();
-httpClient.config = {url: PROCESS_ENGINE_BASE_URL};
-
-const externalAccessor = new ExternalTaskApiExternalAccessor(httpClient);
-const externalTaskAPIService = new ExternalTaskApiClientService(externalAccessor);
-const externalTaskWorker = new ExternalTaskWorker(externalTaskAPIService);
-
 const handleTaskCallback = async (externalTask) => {
     console.log("");
     console.log(externalTask);
@@ -43,6 +36,13 @@ const handleTaskCallback = async (externalTask) => {
 };
 
 async function main() {
+    const httpClient = new HttpClient();
+    httpClient.config = {url: PROCESS_ENGINE_BASE_URL};
+    
+    const externalAccessor = new ExternalTaskApiExternalAccessor(httpClient);
+    const externalTaskAPIService = new ExternalTaskApiClientService(externalAccessor);
+    const externalTaskWorker = new ExternalTaskWorker(externalTaskAPIService);
+
     console.log(`Warten auf Aufgaben für das Topic '${TOPIC}'.`);
 
     externalTaskWorker.waitForAndHandle(
