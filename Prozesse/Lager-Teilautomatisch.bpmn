@@ -16,7 +16,7 @@
         <bpmn:flowNodeRef>Task_1phdfxy</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:task id="Task_0b2d921" name="Etikett auskleben">
+    <bpmn:task id="Task_0b2d921" name="Etikett aufkleben">
       <bpmn:incoming>SequenceFlow_1q0qfdz</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0w2e7w7</bpmn:outgoing>
     </bpmn:task>
@@ -51,6 +51,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_0ztryxm" sourceRef="VersandauftragErhalten" targetRef="Task_19i4pvh" />
     <bpmn:serviceTask id="Task_1phdfxy" name="Etikett ausdrucken" camunda:type="external" camunda:topic="Etikett-ausdrucken">
       <bpmn:extensionElements>
+        <camunda:properties />
         <camunda:properties />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_00cq7sj</bpmn:incoming>

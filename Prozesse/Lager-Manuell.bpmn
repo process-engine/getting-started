@@ -20,7 +20,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_1ozy47x" sourceRef="Task_09eglnu" targetRef="Task_1wyk64x" />
     <bpmn:sequenceFlow id="SequenceFlow_0kxxel8" name="" sourceRef="Task_1wyk64x" targetRef="Task_0ngqxsc" />
     <bpmn:sequenceFlow id="SequenceFlow_194bl0l" sourceRef="Task_0ravoe2" targetRef="Task_17jng84" />
-    <bpmn:task id="Task_17jng84" name="Etikett auskleben">
+    <bpmn:task id="Task_17jng84" name="Etikett aufkleben">
       <bpmn:incoming>SequenceFlow_194bl0l</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1osv2o1</bpmn:outgoing>
     </bpmn:task>
