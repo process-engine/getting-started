@@ -46,7 +46,7 @@
                 Console.WriteLine("");
                 Console.WriteLine("");
 
-                var result = await Program.DoSomeWork();
+                var result = await Program.DoSomeLongWork();
 
                 var externalTaskFinished = new ExternalTaskFinished<TestResult>(externalTask.Id, result);
 
@@ -54,7 +54,7 @@
             });
         } 
 
-        private async  static Task<TestResult> DoSomeWork() 
+        private async  static Task<TestResult> DoSomeLongWork() 
         {
             var result = new TestResult();
 

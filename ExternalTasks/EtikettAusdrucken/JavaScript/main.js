@@ -13,13 +13,12 @@ const identity = {
     token: 'ZHVtbXlfdG9rZW4=',
 };
 
-const PROCESS_ENGINE_BASE_URL = 'http://localhost:8000';
 const TOPIC = 'Etikett-ausdrucken';
 const MAX_TASKS = 10;
 const POLLING_TIMEOUT = 1000;
 const WAIT_TIMEOUT = 10000;
 
-const doSomeWork = async (externalTask) => {
+const doSomeLongWork = async (externalTask) => {
 
     console.log(`Warte für ${WAIT_TIMEOUT} Millisekunden.`);
     await sleep(WAIT_TIMEOUT);
@@ -35,7 +34,7 @@ const doSomeWork = async (externalTask) => {
 
 async function main() {
     const httpClient = new HttpClient();
-    httpClient.config = {url: PROCESS_ENGINE_BASE_URL};
+    httpClient.config = {url: 'http://localhost:8000'};
     
     const externalAccessor = new ExternalTaskApiExternalAccessor(httpClient);
 
@@ -50,7 +49,7 @@ async function main() {
         console.log(externalTask);
         console.log("");
 
-        let result = await doSomeWork();
+        let result = await doSomeLongWork();
 
         let externalTaskFinished = new ExternalTaskFinished(externalTask.id, result);
 
