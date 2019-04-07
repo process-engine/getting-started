@@ -14,8 +14,6 @@
 
     class Program
     {
-        static Uri ProcessEngineBaseUri = new Uri("http://localhost:8000");
-
         const string PROCESS_MODEL_ID= "Lager-Teilautomatisch";
         const string START_EVENT_ID = "VersandauftragErhalten";
 
@@ -28,7 +26,7 @@
 
         static async Task StartProcess() {
             HttpClient httpClient = new HttpClient();
-            httpClient.BaseAddress = Program.ProcessEngineBaseUri;
+            httpClient.BaseAddress = new Uri("http://localhost:8000");
 
             IIdentity identity = CreateIdentity();
 
