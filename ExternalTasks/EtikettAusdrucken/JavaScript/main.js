@@ -18,6 +18,19 @@ const MAX_TASKS = 10;
 const POLLING_TIMEOUT = 1000;
 const WAIT_TIMEOUT = 10000;
 
+function createExternalTaskWorker(url) {
+    const httpClient = new HttpClient();
+    httpClient.config = {url: url};
+    
+    const externalAccessor = new ExternalTaskApiExternalAccessor(httpClient);
+
+    const externalTaskAPIService = new ExternalTaskApiClientService(externalAccessor);
+
+    const externalTaskWorker = new ExternalTaskWorker(externalTaskAPIService);
+
+    return externalTaskWorker;
+}
+
 const doSomeLongWork = async (externalTask) => {
 
     console.log(`Warte für ${WAIT_TIMEOUT} Millisekunden.`);
@@ -48,19 +61,6 @@ async function main() {
 
         return externalTaskFinished;
     }); 
-}
-
-function createExternalTaskWorker(url) {
-    const httpClient = new HttpClient();
-    httpClient.config = {url: url};
-    
-    const externalAccessor = new ExternalTaskApiExternalAccessor(httpClient);
-
-    const externalTaskAPIService = new ExternalTaskApiClientService(externalAccessor);
-
-    const externalTaskWorker = new ExternalTaskWorker(externalTaskAPIService);
-
-    return externalTaskWorker;
 }
 
 async function sleep(milliseconds) {
