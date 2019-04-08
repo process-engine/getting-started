@@ -23,7 +23,7 @@ async function main() {
 
     const processStartPayload = new DataModels.ProcessModels.ProcessStartRequestPayload();
 
-    console.log(`Prozess gestartet '${PROCESS_MODEL_ID}' beim Start-Event '{START_EVENT_ID}'.`);
+    console.log(`Prozess gestartet '${PROCESS_MODEL_ID}' beim Start-Event '${START_EVENT_ID}'.`);
     
     result = await client.startProcessInstance(
         identity,
