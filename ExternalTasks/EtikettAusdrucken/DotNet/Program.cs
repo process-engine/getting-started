@@ -26,13 +26,7 @@
 
         private static async Task RunWorker()
         {
-            HttpClient client = new HttpClient();
-
-            client.BaseAddress = new Uri("http://localhost:8000");
-
-            IExternalTaskAPI externalTaskApi = new ExternalTaskApiClientService(client);
-
-            ExternalTaskWorker externalTaskWorker = new ExternalTaskWorker(externalTaskApi);
+            ExternalTaskWorker externalTaskWorker = Program.CreateExternalTaskWorker("http://localhost:8000");
 
             IIdentity identity = new TestIdentity();
 
@@ -54,7 +48,7 @@
             });
         } 
 
-        private async  static Task<TestResult> DoSomeLongWork() 
+        private async static Task<TestResult> DoSomeLongWork() 
         {
             var result = new TestResult();
             result.TestProperty = "Dies ist das Ergebnis vom DotNet-External-Task.";
@@ -65,6 +59,19 @@
             Console.WriteLine("Bearbeitung fertig!");
 
             return result;
+        }
+
+        private static ExternalTaskWorker CreateExternalTaskWorker(string url) 
+        {
+            HttpClient httpClient = new HttpClient();
+
+            httpClient.BaseAddress = new Uri(url);
+
+            IExternalTaskAPI externalTaskApi = new ExternalTaskApiClientService(httpClient);
+
+            ExternalTaskWorker externalTaskWorker = new ExternalTaskWorker(externalTaskApi);
+
+            return externalTaskWorker;   
         }
     }
 }

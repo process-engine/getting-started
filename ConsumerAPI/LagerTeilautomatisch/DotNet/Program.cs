@@ -14,7 +14,9 @@
 
     class Program
     {
-        const string PROCESS_MODEL_ID= "Lager-Teilautomatisch";
+        const string PROCESS_MODEL_ID= "Lager-Manuell";
+        //const string PROCESS_MODEL_ID= "Lager-Teilautomatisch";
+
         const string START_EVENT_ID = "VersandauftragErhalten";
 
         const string END_EVENT_ID = "VersandauftragVersendet";
@@ -25,26 +27,20 @@
         }
 
         static async Task StartProcess() {
-            HttpClient httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("http://localhost:8000");
+
+            ConsumerApiClientService client = Program.CreateConsumerClient("http://localhost:8000");
+
+            ProcessStartRequestPayload<StartPayload> payload = Program.CreatePayload("Dies ist die Eingabe für den Prozess aus DotNet.");
 
             IIdentity identity = CreateIdentity();
 
-            ConsumerApiClientService client = new ConsumerApiClientService(httpClient);
-
-            StartPayload startPayload = new StartPayload();
-            startPayload.InputProperty = "Dies ist die Eingabe für den Prozess aus DotNet.";
-
-            var processStartPayload = new ProcessStartRequestPayload<StartPayload>();
-            processStartPayload.InputValues = startPayload;
-
-            Console.WriteLine($"Prozess gestartet '{PROCESS_MODEL_ID}' beim Start-Event '{START_EVENT_ID}'.");
+            Console.WriteLine($"Prozess gestartet '{PROCESS_MODEL_ID}' mit Start-Event '{START_EVENT_ID}'.");
 
             var result = await client.StartProcessInstance<StartPayload>(
                 identity, 
                 PROCESS_MODEL_ID, 
                 START_EVENT_ID, 
-                processStartPayload, 
+                payload, 
                 StartCallbackType.CallbackOnEndEventReached,
                 END_EVENT_ID);
 
@@ -53,10 +49,30 @@
             Console.WriteLine(result.TokenPayload);
         }
 
+        static internal ConsumerApiClientService CreateConsumerClient(string url) 
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri(url);
+
+            ConsumerApiClientService client = new ConsumerApiClientService(httpClient);
+
+            return client;
+        }
+
+        static internal ProcessStartRequestPayload<StartPayload> CreatePayload(string inputText) 
+        {
+            StartPayload startPayload = new StartPayload();
+            startPayload.InputProperty = inputText;
+
+            var processStartPayload = new ProcessStartRequestPayload<StartPayload>();
+            processStartPayload.InputValues = startPayload;
+
+            return processStartPayload;
+        }
+
         static internal IIdentity CreateIdentity() 
         {
             return new Identity() { Token = Convert.ToBase64String(Encoding.UTF8.GetBytes("dummy_token")) };
         }
-
     }
 }

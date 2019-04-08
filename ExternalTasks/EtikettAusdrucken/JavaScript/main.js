@@ -33,14 +33,7 @@ const doSomeLongWork = async (externalTask) => {
 };
 
 async function main() {
-    const httpClient = new HttpClient();
-    httpClient.config = {url: 'http://localhost:8000'};
-    
-    const externalAccessor = new ExternalTaskApiExternalAccessor(httpClient);
-
-    const externalTaskAPIService = new ExternalTaskApiClientService(externalAccessor);
-
-    const externalTaskWorker = new ExternalTaskWorker(externalTaskAPIService);
+    const externalTaskWorker = createExternalTaskWorker('http://localhost:8000');
 
     console.log(`Warten auf Aufgaben für das Topic '${TOPIC}'.`);
 
@@ -55,6 +48,19 @@ async function main() {
 
         return externalTaskFinished;
     }); 
+}
+
+function createExternalTaskWorker(url) {
+    const httpClient = new HttpClient();
+    httpClient.config = {url: url};
+    
+    const externalAccessor = new ExternalTaskApiExternalAccessor(httpClient);
+
+    const externalTaskAPIService = new ExternalTaskApiClientService(externalAccessor);
+
+    const externalTaskWorker = new ExternalTaskWorker(externalTaskAPIService);
+
+    return externalTaskWorker;
 }
 
 async function sleep(milliseconds) {
