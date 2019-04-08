@@ -12,9 +12,6 @@
 
     class Program
     {
-
-        static Uri ProcessEngineBaseUri = new Uri("http://localhost:8000");
-
         const string TOPIC = "Etikett-ausdrucken";
 
         const int MAX_TASKS = 10;
@@ -29,13 +26,14 @@
 
         private static async Task RunWorker()
         {
-            IIdentity identity = new TestIdentity();
             HttpClient client = new HttpClient();
 
-            client.BaseAddress = Program.ProcessEngineBaseUri;
+            client.BaseAddress = new Uri("http://localhost:8000");
 
             IExternalTaskAPI externalTaskApi = new ExternalTaskApiClientService(client);
             ExternalTaskWorker externalTaskWorker = new ExternalTaskWorker(externalTaskApi);
+
+            IIdentity identity = new TestIdentity();
 
             Console.WriteLine($"Warten auf Aufgaben für das Topic '{TOPIC}'.");
 
@@ -46,7 +44,6 @@
                 Console.Write(JsonConvert.SerializeObject(externalTask));
                 Console.WriteLine("");
                 Console.WriteLine("");
-
 
                 Console.WriteLine($"Warte für {WAIT_TIMEOUT} Millisekunden.");
                 await Task.Delay(WAIT_TIMEOUT);

@@ -14,8 +14,6 @@
 
     class Program
     {
-        static Uri ProcessEngineBaseUri = new Uri("http://localhost:8000");
-
         const string PROCESS_MODEL_ID= "Lager-Teilautomatisch";
         const string START_EVENT_ID = "VersandauftragErhalten";
 
@@ -27,25 +25,25 @@
         }
 
         static async Task StartProcess() {
-            HttpClient httpClient = new HttpClient();
-            httpClient.BaseAddress = Program.ProcessEngineBaseUri;
-
-            IIdentity identity = CreateIdentity();
+            var httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri("http://localhost:8000");
 
             ConsumerApiClientService client = new ConsumerApiClientService(httpClient);
 
-            StartPayload startPayload = new StartPayload();
+            var processStartRequestPayload = new ProcessStartRequestPayload<StartPayload>();
 
-            var processStartPayload = new ProcessStartRequestPayload<StartPayload>();
-            processStartPayload.InputValues = startPayload;
+            var startPayload = new StartPayload();
+            processStartRequestPayload.InputValues = startPayload;
+
+            IIdentity identity = CreateIdentity();
 
             Console.WriteLine($"Prozess gestartet '{PROCESS_MODEL_ID}' beim Start-Event '{START_EVENT_ID}'.");
 
-            var result = await client.StartProcessInstance<StartPayload>(
+            ProcessStartResponsePayload result = await client.StartProcessInstance<StartPayload>(
                 identity, 
                 PROCESS_MODEL_ID, 
                 START_EVENT_ID, 
-                processStartPayload, 
+                processStartRequestPayload, 
                 StartCallbackType.CallbackOnEndEventReached,
                 END_EVENT_ID);
 
