@@ -57,6 +57,7 @@
         private async  static Task<TestResult> DoSomeLongWork() 
         {
             var result = new TestResult();
+            result.TestProperty = "Dies ist das Ergebnis vom externen Task.";
 
             Console.WriteLine($"Warte für {WAIT_TIMEOUT} Millisekunden.");
             await Task.Delay(WAIT_TIMEOUT);
