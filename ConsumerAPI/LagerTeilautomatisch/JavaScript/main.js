@@ -22,6 +22,7 @@ async function main() {
     const client = new ConsumerApiClientService(externalAccessor);
 
     const processStartPayload = new DataModels.ProcessModels.ProcessStartRequestPayload();
+    processStartPayload.inputValues = {InputProperty: "Dies ist die Eingabe für den Prozess aus DotNet."};
 
     console.log(`Prozess gestartet '${PROCESS_MODEL_ID}' beim Start-Event '${START_EVENT_ID}'.`);
     

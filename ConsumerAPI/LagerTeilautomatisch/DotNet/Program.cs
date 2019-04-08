@@ -33,7 +33,7 @@
             ConsumerApiClientService client = new ConsumerApiClientService(httpClient);
 
             StartPayload startPayload = new StartPayload();
-            startPayload.InputProperty = "Dies ist die Eingabe für den Prozess";
+            startPayload.InputProperty = "Dies ist die Eingabe für den Prozess aus DotNet.";
 
             var processStartPayload = new ProcessStartRequestPayload<StartPayload>();
             processStartPayload.InputValues = startPayload;
