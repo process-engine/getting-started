@@ -3,8 +3,6 @@ const {HttpClient} = require('@essential-projects/http');
 const {ConsumerApiClientService, ExternalAccessor} = require('@process-engine/consumer_api_client');
 const {DataModels} = require('@process-engine/consumer_api_contracts');
 
-const PROCESS_ENGINE_BASE_URL = 'http://localhost:8000';
-
 const identity = {
     token: 'ZHVtbXlfdG9rZW4=',
 };
@@ -18,7 +16,7 @@ async function main() {
     let result;
 
     const httpClient = new HttpClient();
-    httpClient.config = {url: PROCESS_ENGINE_BASE_URL};
+    httpClient.config = {url: 'http://localhost:8000'};
 
     const externalAccessor = new ExternalAccessor(httpClient);
     const client = new ConsumerApiClientService(externalAccessor);
