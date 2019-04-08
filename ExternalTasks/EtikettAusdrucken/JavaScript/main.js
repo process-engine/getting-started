@@ -24,7 +24,7 @@ const doSomeLongWork = async (externalTask) => {
     await sleep(WAIT_TIMEOUT);
 
     const result = { 
-        TestProperty: 'Fertig'
+        TestProperty: 'Dies ist das Ergebnis vom JavaScript-external-Task.'
     };
 
     console.log("Bearbeitung fertig!");
@@ -45,7 +45,7 @@ async function main() {
     console.log(`Warten auf Aufgaben für das Topic '${TOPIC}'.`);
 
     externalTaskWorker.waitForAndHandle(identity, TOPIC, MAX_TASKS, POLLING_TIMEOUT, async (externalTask) => {
-        console.log("");
+        console.log("Daten external-Task: ");
         console.log(externalTask);
         console.log("");
 
