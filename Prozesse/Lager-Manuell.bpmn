@@ -9,18 +9,18 @@
         <bpmn:flowNodeRef>Task_17jng84</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0ravoe2</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0fourey</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>EndEvent_1b3yo2u</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>StartEvent_1mox3jl</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>VersandauftragVersendet</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>VersandauftragErhalten</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_09eglnu</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0ngqxsc</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1wyk64x</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:sequenceFlow id="SequenceFlow_12yj4m4" sourceRef="StartEvent_1mox3jl" targetRef="Task_09eglnu" />
+    <bpmn:sequenceFlow id="SequenceFlow_12yj4m4" sourceRef="VersandauftragErhalten" targetRef="Task_09eglnu" />
     <bpmn:sequenceFlow id="SequenceFlow_1ozy47x" sourceRef="Task_09eglnu" targetRef="Task_1wyk64x" />
     <bpmn:sequenceFlow id="SequenceFlow_0kxxel8" name="" sourceRef="Task_1wyk64x" targetRef="Task_0ngqxsc" />
     <bpmn:sequenceFlow id="SequenceFlow_194bl0l" sourceRef="Task_0ravoe2" targetRef="Task_17jng84" />
-    <bpmn:task id="Task_17jng84" name="Etikett auskleben">
+    <bpmn:task id="Task_17jng84" name="Etikett aufkleben">
       <bpmn:incoming>SequenceFlow_194bl0l</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1osv2o1</bpmn:outgoing>
     </bpmn:task>
@@ -34,11 +34,11 @@
       <bpmn:outgoing>SequenceFlow_13lb6h4</bpmn:outgoing>
     </bpmn:task>
     <bpmn:sequenceFlow id="SequenceFlow_1osv2o1" sourceRef="Task_17jng84" targetRef="Task_0fourey" />
-    <bpmn:endEvent id="EndEvent_1b3yo2u" name="Versandauftrag versendet">
+    <bpmn:endEvent id="VersandauftragVersendet" name="Versandauftrag versendet">
       <bpmn:incoming>SequenceFlow_13lb6h4</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_13lb6h4" sourceRef="Task_0fourey" targetRef="EndEvent_1b3yo2u" />
-    <bpmn:startEvent id="StartEvent_1mox3jl" name="Versandauftrag erhalten">
+    <bpmn:sequenceFlow id="SequenceFlow_13lb6h4" sourceRef="Task_0fourey" targetRef="VersandauftragVersendet" />
+    <bpmn:startEvent id="VersandauftragErhalten" name="Versandauftrag erhalten">
       <bpmn:outgoing>SequenceFlow_12yj4m4</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:task id="Task_09eglnu" name="Ware einsammeln">
@@ -62,7 +62,7 @@
       <bpmndi:BPMNShape id="Lane_1xzf0d3_di" bpmnElement="Lane_1xzf0d3">
         <dc:Bounds x="35" y="4" width="1315" height="284" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="StartEvent_1mox3jl_di" bpmnElement="StartEvent_1mox3jl">
+      <bpmndi:BPMNShape id="StartEvent_1mox3jl_di" bpmnElement="VersandauftragErhalten">
         <dc:Bounds x="113" y="120" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="95" y="156" width="75" height="27" />
@@ -110,7 +110,7 @@
         <di:waypoint x="999" y="138" />
         <di:waypoint x="1069" y="138" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="EndEvent_1b3yo2u_di" bpmnElement="EndEvent_1b3yo2u">
+      <bpmndi:BPMNShape id="EndEvent_1b3yo2u_di" bpmnElement="VersandauftragVersendet">
         <dc:Bounds x="1239" y="120" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1220" y="163" width="75" height="27" />
