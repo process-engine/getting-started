@@ -35,7 +35,7 @@ Anhand zweier Beispiele in Node.js (JavaScript) und .NET (C#) wird die Verwendun
    * zur lokalen ProcessEngine navigieren (http://localhost:8000)
    * Prozess *Lager-Manuel* auswählen
    * zur Ansicht *Inspect* wechseln
-   * unter *Processes running* aus *Live Execution Tracker* wechseln
+   * unter *Processes running* auf *Live Execution Tracker* wechseln
    * von hieraus kann der Prozess manuell fortgeführt werden
 
 #### Prozess starten mit Node.js
@@ -47,7 +47,7 @@ Anhand zweier Beispiele in Node.js (JavaScript) und .NET (C#) wird die Verwendun
    * zur lokalen ProcessEngine navigieren (http://localhost:8000)
    * Prozess *Lager-Manuel* auswählen
    * Zur Ansicht *Inspect* wechseln
-   * Unter *Processes running* aus *Live Execution Tracker* wechseln
+   * Unter *Processes running* auf *Live Execution Tracker* wechseln
    * von hieraus kann der Prozess manuell fortgeführt werden
 
 ### Tasks mit dem *External-Task-Pattern* automatisieren
