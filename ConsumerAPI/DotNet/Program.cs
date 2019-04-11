@@ -17,6 +17,7 @@
         const string PROCESS_MODEL_ID= "Lager-Manuell";
         //const string PROCESS_MODEL_ID= "Lager-Teilautomatisch";
 
+
         const string START_EVENT_ID = "VersandauftragErhalten";
 
         const string END_EVENT_ID = "VersandauftragVersendet";
@@ -36,7 +37,7 @@
 
             Console.WriteLine($"Prozess gestartet '{PROCESS_MODEL_ID}' mit Start-Event '{START_EVENT_ID}'.");
 
-            var result = await client.StartProcessInstance<StartPayload>(
+            ProcessStartResponsePayload result = await client.StartProcessInstance<StartPayload>(
                 identity, 
                 PROCESS_MODEL_ID, 
                 START_EVENT_ID, 
