@@ -3,8 +3,10 @@
 
 ## Was sind die Ziele dieses Projekts?
 
-Die Verwendung der *Consumer-API* und des *External-Task-Pattern* mit Node.js (JavaScript)
-und .NET (C#) anhand zweier einfacher Beispiele aufzuzeigen
+* Starten einer neuer Prozessinstanz mittels Consumer-API
+* Ausführung von Aktivitäten mittels External-Task-Pattern
+
+Anhand zweier Beispiele in Node.js (JavaScript) und .NET (C#) wird die Verwendung dargestellt.
 
 ## Wie kann ich die Beispiele verwenden?
 
@@ -13,11 +15,11 @@ und .NET (C#) anhand zweier einfacher Beispiele aufzuzeigen
 * [BPMN-Studio](http:///www.process-engine.io)
 * [.NET Core 2.1 SDK](https://www.microsoft.com/net/download/core) - die
  `dotnet` CLI muss über die Konsole/Terminal erreichbar sein
-* [Node.js](https://nodejs.org/en/) >= v8.11.* und npm >= 5.6.*, dabei muss `npm -v` via Console erreichbar sein.
+* [Node.js](https://nodejs.org/en/) `>= v8.11.*`und npm `>= 5.6.*`, dabei muss `npm -v` via Console erreichbar sein.
  
 ### Setup/Installation
  
-* Die BPMN-Diagramme im Verzeichnis *Prozesse* mussen in der ProcessEngine, die mit dem BPMN-Studio geliefert werden, veröffentlicht sein.
+* Die BPMN-Diagramme im Verzeichnis *Prozesse* müssen in der ProcessEngine, die mit dem BPMN-Studio geliefert werden, veröffentlicht sein.
 
 ## Wie kann ich das Projekt benutzen?
 
