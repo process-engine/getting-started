@@ -33,7 +33,7 @@ Anhand zweier Beispiele in Node.js (JavaScript) und .NET (C#) wird die Verwendun
 * `dotnet run`
 * BPMN-Studio öffnen und:
    * zur lokalen ProcessEngine navigieren (http://localhost:8000)
-   * Prozess *Lager-Manuel* auswählen
+   * Prozess *Lager-Manuell* auswählen
    * zur Ansicht *Inspect* wechseln
    * unter *Processes running* auf *Live Execution Tracker* wechseln
    * von hieraus kann der Prozess manuell fortgeführt werden
@@ -45,7 +45,7 @@ Anhand zweier Beispiele in Node.js (JavaScript) und .NET (C#) wird die Verwendun
 * `npm start`
 * BPMN-Studio öffnen und:
    * zur lokalen ProcessEngine navigieren (http://localhost:8000)
-   * Prozess *Lager-Manuel* auswählen
+   * Prozess *Lager-Manuell* auswählen
    * Zur Ansicht *Inspect* wechseln
    * Unter *Processes running* auf *Live Execution Tracker* wechseln
    * von hieraus kann der Prozess manuell fortgeführt werden
@@ -78,7 +78,7 @@ Anhand zweier Beispiele in Node.js (JavaScript) und .NET (C#) wird die Verwendun
    * zur lokalen ProcessEngine navigieren (http://localhost:8000)
    * Prozess *Lager-Teilautomatisch* auswählen
    * Prozess starten und manuell ausführen
-   * Der Task *Etikett ausdrucken*  wird durch das NodeJs-Programm automatisch weitergeführt
+   * Der Task *Etikett ausdrucken*  wird durch das Node.js-Programm automatisch weitergeführt
    * Anschließend kann der Prozess manuel bis zum End-Event ausgeführt werden
 
 ### Wen kann ich auf das Projekt ansprechen?
