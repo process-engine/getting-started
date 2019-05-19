@@ -14,13 +14,13 @@
 
     class Program
     {
-        const string PROCESS_MODEL_ID= "Lager-Manuell";
+        const string PROCESS_MODEL_ID= "Benutzeraktivierung";
         //const string PROCESS_MODEL_ID= "Lager-Teilautomatisch";
 
 
-        const string START_EVENT_ID = "VersandauftragErhalten";
+        const string START_EVENT_ID = "StartAktivierung";
 
-        const string END_EVENT_ID = "VersandauftragVersendet";
+        const string END_EVENT_ID = "EndeAktivierung";
 
         static void Main(string[] args)
         {
@@ -31,7 +31,7 @@
 
             ConsumerApiClientService client = Program.CreateConsumerClient("http://localhost:8000");
 
-            ProcessStartRequestPayload<StartPayload> payload = Program.CreatePayload("Dies ist die Eingabe für den Prozess aus DotNet.");
+            ProcessStartRequestPayload<StartPayload> payload = Program.CreatePayload(1000);
 
             IIdentity identity = CreateIdentity();
 
@@ -60,10 +60,10 @@
             return client;
         }
 
-        static internal ProcessStartRequestPayload<StartPayload> CreatePayload(string inputText) 
+        static internal ProcessStartRequestPayload<StartPayload> CreatePayload(int inputAmount) 
         {
             StartPayload startPayload = new StartPayload();
-            startPayload.InputProperty = inputText;
+            startPayload.ShoppingCardAmount = inputAmount;
 
             var processStartPayload = new ProcessStartRequestPayload<StartPayload>();
             processStartPayload.InputValues = startPayload;
