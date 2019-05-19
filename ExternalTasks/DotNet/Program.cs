@@ -12,7 +12,7 @@
 
     class Program
     {
-        const string TOPIC = "Etikett-ausdrucken";
+        const string TOPIC = "AktivierungsemailSenden";
 
         const int MAX_TASKS = 10;
 
@@ -51,7 +51,7 @@
         private async static Task<TestResult> DoSomeLongWork() 
         {
             var result = new TestResult();
-            result.TestProperty = "Dies ist das Ergebnis vom DotNet-External-Task.";
+            result.ShoppingCardAmount = 1000;
 
             Console.WriteLine($"Warte für {WAIT_TIMEOUT} Millisekunden.");
             await Task.Delay(WAIT_TIMEOUT);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1fycja2" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.2.4">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1fycja2" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.2.4">
   <bpmn:collaboration id="Collaboration_0bm53xd" name="">
     <bpmn:participant id="Participant_0h78o0c" name="Benutzeraktivierung" processRef="Benutzeraktivierung" />
   </bpmn:collaboration>
@@ -7,11 +7,7 @@
     <bpmn:startEvent id="StartAktivierung" name="Benutzer hat sich registriert">
       <bpmn:outgoing>SequenceFlow_00r8nxy</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:task id="AktivierungsemailSenden" name="Aktivierungs-E-Mail verschicken">
-      <bpmn:incoming>SequenceFlow_00r8nxy</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1s68sja</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:exclusiveGateway id="ExclusiveGateway_1aduydp" name="Bestellwert">
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1aduydp" name="Bestellwert" default="SequenceFlow_018rugf">
       <bpmn:incoming>SequenceFlow_1s68sja</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1ys58cn</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_018rugf</bpmn:outgoing>
@@ -34,9 +30,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_1ys58cn" name="über 100 EUR" sourceRef="ExclusiveGateway_1aduydp" targetRef="ExclusiveGateway_1f7osoi">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">token.current.shoppingCardAmount &gt; 100;</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_018rugf" name="kleiner/gleich 100 EUR oder keine Bestellung" sourceRef="ExclusiveGateway_1aduydp" targetRef="Task_0rf7p74">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">token.current.shoppingCardAmount &lt;= 100;</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_018rugf" name="kleiner/gleich 100 EUR oder keine Bestellung" sourceRef="ExclusiveGateway_1aduydp" targetRef="Task_0rf7p74" />
     <bpmn:sequenceFlow id="SequenceFlow_02264l9" name="zwischen 100 und 1.000 EUR" sourceRef="ExclusiveGateway_1f7osoi" targetRef="Task_17dgyzr" />
     <bpmn:sequenceFlow id="SequenceFlow_1tiy5gs" sourceRef="Task_17dgyzr" targetRef="Task_1e80e3r" />
     <bpmn:sequenceFlow id="SequenceFlow_1gl4kh4" sourceRef="Task_0rf7p74" targetRef="ExclusiveGateway_16p3j8g" />
@@ -79,6 +73,13 @@
       <bpmn:outgoing>SequenceFlow_036zliz</bpmn:outgoing>
     </bpmn:task>
     <bpmn:sequenceFlow id="SequenceFlow_15t8qg9" sourceRef="Task_13dnc6z" targetRef="Task_1t06wkg" />
+    <bpmn:serviceTask id="AktivierungsemailSenden" name="Aktivierungs-E-Mail verschicken" camunda:type="external" camunda:topic="AktivierungsemailSenden">
+      <bpmn:extensionElements>
+        <camunda:properties />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_00r8nxy</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1s68sja</bpmn:outgoing>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0bm53xd">
@@ -95,9 +96,6 @@
         <di:waypoint x="358" y="246" />
         <di:waypoint x="424" y="246" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Task_069y8is_di" bpmnElement="AktivierungsemailSenden">
-        <dc:Bounds x="424" y="206" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_1aduydp_di" bpmnElement="ExclusiveGateway_1aduydp" isMarkerVisible="true">
         <dc:Bounds x="574" y="221" width="50" height="50" />
         <bpmndi:BPMNLabel>
@@ -218,6 +216,9 @@
         <di:waypoint x="1311" y="468" />
         <di:waypoint x="1311" y="271" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_08gfhvg_di" bpmnElement="AktivierungsemailSenden">
+        <dc:Bounds x="424" y="206" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
