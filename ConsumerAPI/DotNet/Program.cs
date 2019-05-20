@@ -15,7 +15,6 @@
     class Program
     {
         const string PROCESS_MODEL_ID= "Benutzeraktivierung";
-        //const string PROCESS_MODEL_ID= "Lager-Teilautomatisch";
 
 
         const string START_EVENT_ID = "StartAktivierung";

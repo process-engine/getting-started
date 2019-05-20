@@ -7,11 +7,10 @@ const identity = {
     token: 'ZHVtbXlfdG9rZW4=',
 };
 
-const PROCESS_MODEL_ID= 'Lager-Manuell';
-//const PROCESS_MODEL_ID= 'Lager-Teilautomatisch';
+const PROCESS_MODEL_ID= 'Benutzeraktivierung';
 
-const START_EVENT_ID = 'VersandauftragErhalten';
-const END_EVENT_ID = 'VersandauftragVersendet';
+const START_EVENT_ID = 'StartAktivierung';
+const END_EVENT_ID = 'EndeAktivierung';
 
 function createConsumerClient(url) {
     const httpClient = new HttpClient();
@@ -23,9 +22,9 @@ function createConsumerClient(url) {
     return client;
 }
 
-function createPayload(inputProperty) {
+function createPayload(shoppingCardAmount) {
     const processStartPayload = new DataModels.ProcessModels.ProcessStartRequestPayload();
-    processStartPayload.inputValues = {InputProperty: inputProperty};
+    processStartPayload.inputValues = {shoppingCardAmount: shoppingCardAmount};
 
     return processStartPayload;
 }
@@ -33,7 +32,7 @@ function createPayload(inputProperty) {
 async function main() {
     const client = createConsumerClient('http://localhost:8000');
 
-    const processStartPayload = createPayload('Dies ist die Eingabe für den Prozess aus JavaScript.');
+    const processStartPayload = createPayload(1000);
 
     console.log(`Prozess gestartet '${PROCESS_MODEL_ID}' beim Start-Event '${START_EVENT_ID}'.`);
     

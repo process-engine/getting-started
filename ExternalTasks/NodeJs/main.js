@@ -13,7 +13,7 @@ const identity = {
     token: 'ZHVtbXlfdG9rZW4=',
 };
 
-const TOPIC = 'Etikett-ausdrucken';
+const TOPIC = 'AktivierungsemailSenden';
 const MAX_TASKS = 10;
 const POLLING_TIMEOUT = 1000;
 const WAIT_TIMEOUT = 10000;
@@ -31,13 +31,13 @@ function createExternalTaskWorker(url) {
     return externalTaskWorker;
 }
 
-const doSomeLongWork = async (externalTask) => {
+const doSomeLongWork = async (payload) => {
 
     console.log(`Warte für ${WAIT_TIMEOUT} Millisekunden.`);
     await sleep(WAIT_TIMEOUT);
 
     const result = { 
-        TestProperty: 'Dies ist das Ergebnis vom JavaScript-external-Task.'
+        shoppingCardAmount: payload.shoppingCardAmount
     };
 
     console.log('Bearbeitung fertig!');
@@ -55,7 +55,7 @@ async function main() {
         console.log(externalTask);
         console.log('');
 
-        let result = await doSomeLongWork();
+        let result = await doSomeLongWork(externalTask.payload);
 
         let externalTaskFinished = new ExternalTaskFinished(externalTask.id, result);
 
