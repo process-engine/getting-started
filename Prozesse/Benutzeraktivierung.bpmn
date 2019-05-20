@@ -31,10 +31,14 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">token.current.shoppingCardAmount &gt; 100;</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_018rugf" name="kleiner/gleich 100 EUR oder keine Bestellung" sourceRef="ExclusiveGateway_1aduydp" targetRef="Task_0rf7p74" />
-    <bpmn:sequenceFlow id="SequenceFlow_02264l9" name="zwischen 100 und 1.000 EUR" sourceRef="ExclusiveGateway_1f7osoi" targetRef="Task_17dgyzr" />
+    <bpmn:sequenceFlow id="SequenceFlow_02264l9" name="zwischen 100 und 1.000 EUR" sourceRef="ExclusiveGateway_1f7osoi" targetRef="Task_17dgyzr">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">token.current.shoppingCardAmount &lt;= 1000</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1tiy5gs" sourceRef="Task_17dgyzr" targetRef="Task_1e80e3r" />
     <bpmn:sequenceFlow id="SequenceFlow_1gl4kh4" sourceRef="Task_0rf7p74" targetRef="ExclusiveGateway_16p3j8g" />
-    <bpmn:sequenceFlow id="SequenceFlow_086whsq" name="zwischen 1.000 und 10.000 EUR" sourceRef="ExclusiveGateway_1f7osoi" targetRef="Task_14l3qm9" />
+    <bpmn:sequenceFlow id="SequenceFlow_086whsq" name="zwischen 1.000 und 10.000 EUR" sourceRef="ExclusiveGateway_1f7osoi" targetRef="Task_14l3qm9">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">token.current.shoppingCardAmount &gt; 1000 &amp;&amp; token.current.shoppingCardAmount &lt;= 10000</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0fs576c" name="über 10.000 EUR" sourceRef="ExclusiveGateway_1f7osoi" targetRef="Task_13dnc6z" />
     <bpmn:sequenceFlow id="SequenceFlow_1rmgjnd" sourceRef="Task_1e80e3r" targetRef="ExclusiveGateway_0u8sct6" />
     <bpmn:sequenceFlow id="SequenceFlow_1h12mgi" sourceRef="Task_14l3qm9" targetRef="ExclusiveGateway_0u8sct6" />

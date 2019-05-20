@@ -40,7 +40,7 @@
                 Console.WriteLine("");
                 Console.WriteLine("");
 
-                var result = await Program.DoSomeLongWork();
+                var result = await Program.DoSomeLongWork(externalTask.Payload);
 
                 var externalTaskFinished = new ExternalTaskFinished<TestResult>(externalTask.Id, result);
 
@@ -48,10 +48,10 @@
             });
         } 
 
-        private async static Task<TestResult> DoSomeLongWork() 
+        private async static Task<TestResult> DoSomeLongWork(TestPayload payload) 
         {
             var result = new TestResult();
-            result.ShoppingCardAmount = 1000;
+            result.ShoppingCardAmount = payload.ShoppingCardAmount;
 
             Console.WriteLine($"Warte für {WAIT_TIMEOUT} Millisekunden.");
             await Task.Delay(WAIT_TIMEOUT);
