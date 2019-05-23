@@ -25,6 +25,7 @@ Anhand zweier Beispiele in Node.js und .NET (Core) wird die Verwendung dargestel
 
 * Das BPMN-Studio starten
     * Die lokale ProcessEngine wird automatisch unter http://localhost:8000 mit gestartet.
+    * Sollte Port 8000 bereits belegt sein, wird ein zufälliger Port ausgewählt.
 
 ### Prozess starten
 
