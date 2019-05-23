@@ -6,7 +6,7 @@
 * Starten einer neuen Prozessinstanz mittels Consumer-API
 * Ausführung von Aktivitäten mittels External-Task-Pattern
 
-Anhand zweier Beispiele in Node.js und C# wird die Verwendung dargestellt.
+Anhand zweier Beispiele in Node.js und .NET (Core) wird die Verwendung dargestellt.
 
 ## Wie kann ich die Beispiele verwenden?
 

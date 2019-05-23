@@ -7,7 +7,7 @@ const {
 } = require('@process-engine/external_task_api_client');
 const {ExternalTaskFinished} = require('@process-engine/external_task_api_contracts');
 
-const identity = {
+const sampleIdentity = {
   token: 'ZHVtbXlfdG9rZW4=',
 };
 
@@ -20,7 +20,7 @@ async function main() {
 
   console.log(`Warten auf Aufgaben für das Topic '${topic}'.`);
 
-  externalTaskWorker.waitForAndHandle(identity, topic, maxTasks, pollingTimeout, async (externalTask) => {
+  externalTaskWorker.waitForAndHandle(sampleIdentity, topic, maxTasks, pollingTimeout, async (externalTask) => {
     console.log('Daten external-Task: ');
     console.log(externalTask);
     console.log('');

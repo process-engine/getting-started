@@ -12,10 +12,9 @@
     using ProcessEngine.ConsumerAPI.Contracts;
     using ProcessEngine.ConsumerAPI.Contracts.DataModel;
 
-    class Program
+    public class Program
     {
         const string PROCESS_MODEL_ID= "Lager-Manuell";
-
 
         const string START_EVENT_ID = "VersandauftragErhalten";
 
@@ -26,18 +25,18 @@
             StartProcess().GetAwaiter().GetResult();
         }
 
-        static async Task StartProcess() {
+        internal static async Task StartProcess() {
 
             var client = CreateConsumerApiClient("http://localhost:8000");
 
             var payload = CreateStartRequestPayload("Dies ist die Eingabe für den Prozess aus DotNet.");
 
-            var identity = CreateIdentity();
+            var sampleIdentity = CreateIdentity();
 
             Console.WriteLine($"Prozess '{PROCESS_MODEL_ID}' mit Start-Event '{START_EVENT_ID}' gestartet.");
 
             var result = await client.StartProcessInstance<CustomStartPayload>(
-                identity,
+                sampleIdentity,
                 PROCESS_MODEL_ID,
                 START_EVENT_ID,
                 payload,
@@ -49,7 +48,7 @@
             Console.WriteLine(result.TokenPayload);
         }
 
-        static internal ConsumerApiClientService CreateConsumerApiClient(string url)
+        internal static ConsumerApiClientService CreateConsumerApiClient(string url)
         {
             var httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri(url);
@@ -59,7 +58,7 @@
             return client;
         }
 
-        static internal ProcessStartRequestPayload<CustomStartPayload> CreateStartRequestPayload(string inputText)
+        internal static ProcessStartRequestPayload<CustomStartPayload> CreateStartRequestPayload(string inputText)
         {
             var startPayload = new CustomStartPayload();
             startPayload.InputProperty = inputText;
@@ -70,7 +69,7 @@
             return processStartPayload;
         }
 
-        static internal IIdentity CreateIdentity()
+        internal static IIdentity CreateIdentity()
         {
             return new Identity() { Token = Convert.ToBase64String(Encoding.UTF8.GetBytes("dummy_token")) };
         }

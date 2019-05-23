@@ -28,11 +28,11 @@
         {
             var externalTaskWorker = CreateExternalTaskWorker("http://localhost:8000");
 
-            var identity = new TestIdentity();
+            var sampleIdentity = new TestIdentity();
 
             Console.WriteLine($"Warten auf Aufgaben für das Topic '{TOPIC}'.");
 
-            await externalTaskWorker.WaitForHandle<TestPayload>(identity, TOPIC, MAX_TASKS, POLLING_TIMEOUT, async (externalTask) =>
+            await externalTaskWorker.WaitForHandle<TestPayload>(sampleIdentity, TOPIC, MAX_TASKS, POLLING_TIMEOUT, async (externalTask) =>
             {
                 Console.WriteLine("");
                 Console.Write("Daten: ");
