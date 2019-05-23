@@ -6,7 +6,11 @@
   "scripts": {
     "start": "node main.js"
   },
-  "author": "5Minds IT-Solutions GmbH & Co. KG",
+  "author": {
+    "name": "5Minds IT-Solutions GmbH & Co. KG",
+    "email": "info@5minds.de",
+    "url": "https://5minds.de/"
+  },
   "contributors": [
     "Christian Bernds <christian.bernds@5minds.de>",
     "Christian Werner <christian.werner@5minds.de>",
