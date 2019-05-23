@@ -8,6 +8,7 @@ const {
 const {ExternalTaskFinished} = require('@process-engine/external_task_api_contracts');
 
 const sampleIdentity = {
+  // The following is a "dummy token" that always works with the Studio's internal ProcessEngine
   token: 'ZHVtbXlfdG9rZW4=',
 };
 
@@ -46,7 +47,7 @@ function createExternalTaskWorker(url) {
   return externalTaskWorker;
 }
 
-const doSomeLongWork = async (externalTask) => {
+async function doSomeLongWork(externalTask) {
 
   const longWorkTimeout = 10000;
   console.log(`Warte für ${longWorkTimeout} Millisekunden.`);
