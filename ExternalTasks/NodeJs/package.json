@@ -1,7 +1,7 @@
 {
   "name": "etikett_ausdrucken_external_task",
   "version": "1.0.0",
-  "description": "Der Client zum Ausführen des Task für 'Etikett drucken'",
+  "description": "Der Worker zum Ausführen des ExternalTask für 'Etikett drucken'",
   "main": "main.js",
   "scripts": {
     "start": "node main.js"
