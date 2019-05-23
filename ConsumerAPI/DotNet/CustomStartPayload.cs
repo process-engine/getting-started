@@ -1,6 +1,6 @@
 namespace LagerTeilautomatisch
 {
-    public class StartPayload 
+    public class CustomStartPayload
     {
         public string InputProperty {get; set;}
     }

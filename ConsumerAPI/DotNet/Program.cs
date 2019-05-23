@@ -15,7 +15,6 @@
     class Program
     {
         const string PROCESS_MODEL_ID= "Lager-Manuell";
-        //const string PROCESS_MODEL_ID= "Lager-Teilautomatisch";
 
 
         const string START_EVENT_ID = "VersandauftragErhalten";
@@ -29,19 +28,19 @@
 
         static async Task StartProcess() {
 
-            ConsumerApiClientService client = Program.CreateConsumerClient("http://localhost:8000");
+            var client = CreateConsumerApiClient("http://localhost:8000");
 
-            ProcessStartRequestPayload<StartPayload> payload = Program.CreatePayload("Dies ist die Eingabe für den Prozess aus DotNet.");
+            var payload = CreateStartRequestPayload("Dies ist die Eingabe für den Prozess aus DotNet.");
 
-            IIdentity identity = CreateIdentity();
+            var identity = CreateIdentity();
 
             Console.WriteLine($"Prozess gestartet '{PROCESS_MODEL_ID}' mit Start-Event '{START_EVENT_ID}'.");
 
-            ProcessStartResponsePayload result = await client.StartProcessInstance<StartPayload>(
-                identity, 
-                PROCESS_MODEL_ID, 
-                START_EVENT_ID, 
-                payload, 
+            var result = await client.StartProcessInstance<CustomStartPayload>(
+                identity,
+                PROCESS_MODEL_ID,
+                START_EVENT_ID,
+                payload,
                 StartCallbackType.CallbackOnEndEventReached,
                 END_EVENT_ID);
 
@@ -50,28 +49,28 @@
             Console.WriteLine(result.TokenPayload);
         }
 
-        static internal ConsumerApiClientService CreateConsumerClient(string url) 
+        static internal ConsumerApiClientService CreateConsumerApiClient(string url)
         {
-            HttpClient httpClient = new HttpClient();
+            var httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri(url);
 
-            ConsumerApiClientService client = new ConsumerApiClientService(httpClient);
+            var client = new ConsumerApiClientService(httpClient);
 
             return client;
         }
 
-        static internal ProcessStartRequestPayload<StartPayload> CreatePayload(string inputText) 
+        static internal ProcessStartRequestPayload<CustomStartPayload> CreateStartRequestPayload(string inputText)
         {
-            StartPayload startPayload = new StartPayload();
+            var startPayload = new CustomStartPayload();
             startPayload.InputProperty = inputText;
 
-            var processStartPayload = new ProcessStartRequestPayload<StartPayload>();
+            var processStartPayload = new ProcessStartRequestPayload<CustomStartPayload>();
             processStartPayload.InputValues = startPayload;
 
             return processStartPayload;
         }
 
-        static internal IIdentity CreateIdentity() 
+        static internal IIdentity CreateIdentity()
         {
             return new Identity() { Token = Convert.ToBase64String(Encoding.UTF8.GetBytes("dummy_token")) };
         }
