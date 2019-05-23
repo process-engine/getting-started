@@ -34,7 +34,7 @@
 
             var identity = CreateIdentity();
 
-            Console.WriteLine($"Prozess gestartet '{PROCESS_MODEL_ID}' mit Start-Event '{START_EVENT_ID}'.");
+            Console.WriteLine($"Prozess '{PROCESS_MODEL_ID}' mit Start-Event '{START_EVENT_ID}' gestartet.");
 
             var result = await client.StartProcessInstance<CustomStartPayload>(
                 identity,

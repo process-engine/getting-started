@@ -17,7 +17,7 @@ async function main() {
 
   const processStartPayload = createStartRequestPayload('Dies ist die Eingabe für den Prozess aus JavaScript.');
 
-  console.log(`Prozess gestartet '${processModelId}' beim Start-Event '${startEventId}'.`);
+  console.log(`Prozess '${processModelId}' mit Start-Event '${startEventId}' gestartet.`);
 
   const processStartResult = await client.startProcessInstance(
     sampleIdentity,
