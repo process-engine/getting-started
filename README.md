@@ -6,7 +6,7 @@
 * Starten einer neuen Prozessinstanz mittels Consumer-API
 * Ausführung von Aktivitäten mittels External-Task-Pattern
 
-Anhand zweier Beispiele in Node.js (JavaScript) und .NET (C#) wird die Verwendung dargestellt.
+Anhand zweier Beispiele in Node.js und C# wird die Verwendung dargestellt.
 
 ## Wie kann ich die Beispiele verwenden?
 
@@ -14,16 +14,17 @@ Anhand zweier Beispiele in Node.js (JavaScript) und .NET (C#) wird die Verwendun
 
 * [BPMN-Studio](http:///www.process-engine.io)
 * [.NET Core 2.1 SDK](https://www.microsoft.com/net/download/core) - die
- `dotnet` CLI muss über die Konsole/Terminal erreichbar sein
-* [Node.js](https://nodejs.org/en/) `>= v8.11.*`und npm `>= 5.6.*`, dabei muss `npm -v` via Console erreichbar sein.
+ `dotnet` CLI muss über die Konsole/das Terminal ausführbar sein
+* [NodeJS](https://nodejs.org/en/) `>= v8.11.*`und npm `>= 5.6.*` - `npm` muss über die Konsole/das Terminal ausführbar sein.
 
 ### Setup/Installation
 
-* Die BPMN-Diagramme im Verzeichnis *Prozesse* müssen in der ProcessEngine, die mit dem BPMN-Studio geliefert werden, veröffentlicht sein.
+* Die BPMN-Diagramme im Verzeichnis *Prozesse* müssen in der ProcessEngine, die mit dem BPMN-Studio geliefert wird, deployed sein.
 
 ## Wie kann ich das Projekt benutzen?
 
-* Das BPMN-Studio starten, damit wird die lokale ProcessEngine unter 'http://localhost:8000' auch gestartet.
+* Das BPMN-Studio starten
+    * Die lokale ProcessEngine wird automatisch unter http://localhost:8000 mit gestartet.
 
 ### Prozess starten
 
@@ -32,18 +33,20 @@ Anhand zweier Beispiele in Node.js (JavaScript) und .NET (C#) wird die Verwendun
 * `cd ConsumerAPI/DotNet`
 * `dotnet run`
 * BPMN-Studio öffnen und:
+
    * zur lokalen ProcessEngine navigieren (http://localhost:8000)
    * Prozess *Lager-Manuell* auswählen
    * zur Ansicht *Inspect* wechseln
    * unter *Processes running* auf *Live Execution Tracker* wechseln
    * von hieraus kann der Prozess manuell fortgeführt werden
 
-#### Prozess starten mit Node.js
+#### Prozess starten mit NodeJS
 
 * `cd ConsumerAPI/NodeJs`
 * `npm install`
 * `npm start`
 * BPMN-Studio öffnen und:
+
    * zur lokalen ProcessEngine navigieren (http://localhost:8000)
    * Prozess *Lager-Manuell* auswählen
    * Zur Ansicht *Inspect* wechseln
@@ -66,7 +69,7 @@ Anhand zweier Beispiele in Node.js (JavaScript) und .NET (C#) wird die Verwendun
    * Der Task *Etikett ausdrucken*  wird durch das .NET-Programm automatisch weitergeführt
    * Anschließend kann der Prozess manuell bis zum End-Event ausgeführt werden
 
-#### *External-Task-Pattern* mit Node.js
+#### *External-Task-Pattern* mit NodeJS
 
 * Änderungen im Code ausführen:
     *  ExternalTasks/DotNet/Programm.cs Zeile 17 auskommentieren und Zeile 18 einkommentieren, so
@@ -78,7 +81,7 @@ Anhand zweier Beispiele in Node.js (JavaScript) und .NET (C#) wird die Verwendun
    * zur lokalen ProcessEngine navigieren (http://localhost:8000)
    * Prozess *Lager-Teilautomatisch* auswählen
    * Prozess starten und manuell ausführen
-   * Der Task *Etikett ausdrucken*  wird durch das Node.js-Programm automatisch weitergeführt
+   * Der Task *Etikett ausdrucken*  wird durch das NodeJS-Programm automatisch weitergeführt
    * Anschließend kann der Prozess manuell bis zum End-Event ausgeführt werden
 
 ### Wen kann ich auf das Projekt ansprechen?
