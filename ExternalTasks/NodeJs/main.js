@@ -53,7 +53,7 @@ const doSomeLongWork = async (externalTask) => {
   await sleep(longWorkTimeout);
 
   const result = {
-      TestProperty: 'Dies ist das Ergebnis vom NodeJS-external-Task.'
+    TestProperty: 'Dies ist das Ergebnis vom NodeJS-external-Task.'
   };
 
   console.log('ExternalTask erfolgreich bearbeitet!');
