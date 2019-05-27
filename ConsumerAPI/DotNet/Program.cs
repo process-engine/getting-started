@@ -19,7 +19,6 @@
     {
         const string PROCESS_MODEL_ID= "Benutzeraktivierung";
 
-
         const string START_EVENT_ID = "StartAktivierung";
 
         const string END_EVENT_ID = "EndeAktivierung";
