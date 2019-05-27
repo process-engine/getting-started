@@ -47,31 +47,6 @@
             });
         }
 
-        private static async Task RunWorker()
-        {
-            ExternalTaskWorker externalTaskWorker = Program.CreateExternalTaskWorker("http://localhost:8000");
-
-            IIdentity identity = new TestIdentity();
-
-            //identity.Token
-
-            Console.WriteLine($"Warten auf Aufgaben für das Topic '{TOPIC}'.");
-            
-            await externalTaskWorker.WaitForHandle<TestPayload>(identity, TOPIC, MAX_TASKS, POLLING_TIMEOUT, async (externalTask) =>
-            {
-                Console.WriteLine("");
-                Console.Write("Daten: ");
-                Console.Write(JsonConvert.SerializeObject(externalTask));
-                Console.WriteLine("");
-                Console.WriteLine("");
-
-                var result = await Program.DoSomeLongWork(externalTask.Payload);
-
-                var externalTaskFinished = new ExternalTaskFinished<TestResult>(externalTask.Id, result);
-
-                return externalTaskFinished;
-            });
-        } 
 
         private async static Task<TestResult> DoSomeLongWork(TestPayload payload) 
         {
@@ -84,19 +59,6 @@
             Console.WriteLine("Bearbeitung fertig!");
 
             return result;
-        }
-
-        private static ExternalTaskWorker CreateExternalTaskWorker(string url) 
-        {
-            HttpClient httpClient = new HttpClient();
-
-            httpClient.BaseAddress = new Uri(url);
-
-            IExternalTaskAPI externalTaskApi = new ExternalTaskApiClientService(httpClient);
-
-            ExternalTaskWorker externalTaskWorker = new ExternalTaskWorker(externalTaskApi);
-
-            return externalTaskWorker;   
         }
     }
 }
