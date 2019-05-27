@@ -8,9 +8,12 @@
 
     using EssentialProjects.IAM.Contracts;
 
-    using ProcessEngine.ConsumerAPI.Client;
-    using ProcessEngine.ConsumerAPI.Contracts;
-    using ProcessEngine.ConsumerAPI.Contracts.DataModel;
+    using global::ProcessEngine.ConsumerAPI.Client;
+    using global::ProcessEngine.ConsumerAPI.Contracts;
+    using global::ProcessEngine.ConsumerAPI.Contracts.DataModel;
+
+    using ProcessEngine;
+    using Identity = ProcessEngine.Identity;
 
     class Program
     {
@@ -23,56 +26,28 @@
 
         static void Main(string[] args)
         {
-            StartProcess().GetAwaiter().GetResult();
+            StartProcessNew().GetAwaiter().GetResult();
         }
 
-        static async Task StartProcess() {
+        static async Task StartProcessNew() 
+        {
+            //ProcessEngineClient client = new ProcessEngineClient("http://localhost:8000", Identity.DefaultIdentity);
+            ProcessEngineClient client = new ProcessEngineClient("http://localhost:8000");
 
-            ConsumerApiClientService client = Program.CreateConsumerClient("http://localhost:8000");
-
-            ProcessStartRequestPayload<StartPayload> payload = Program.CreatePayload(1000);
-
-            IIdentity identity = CreateIdentity();
+            ProcessStartRequest<StartPayload> request = new ProcessStartRequest<StartPayload>();
+            request.Payload.ShoppingCardAmount = 1000;
 
             Console.WriteLine($"Prozess gestartet '{PROCESS_MODEL_ID}' mit Start-Event '{START_EVENT_ID}'.");
 
             ProcessStartResponsePayload result = await client.StartProcessInstance<StartPayload>(
-                identity, 
-                PROCESS_MODEL_ID, 
-                START_EVENT_ID, 
-                payload, 
+                PROCESS_MODEL_ID, START_EVENT_ID,
+                request, 
                 StartCallbackType.CallbackOnEndEventReached,
                 END_EVENT_ID);
-
+   
             Console.WriteLine($"Prozess beendet (CorrelationId: '{result.CorrelationId}').");
             Console.Write("Daten: ");
             Console.WriteLine(result.TokenPayload);
-        }
-
-        static internal ConsumerApiClientService CreateConsumerClient(string url) 
-        {
-            HttpClient httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri(url);
-
-            ConsumerApiClientService client = new ConsumerApiClientService(httpClient);
-
-            return client;
-        }
-
-        static internal ProcessStartRequestPayload<StartPayload> CreatePayload(int inputAmount) 
-        {
-            StartPayload startPayload = new StartPayload();
-            startPayload.ShoppingCardAmount = inputAmount;
-
-            var processStartPayload = new ProcessStartRequestPayload<StartPayload>();
-            processStartPayload.InputValues = startPayload;
-
-            return processStartPayload;
-        }
-
-        static internal IIdentity CreateIdentity() 
-        {
-            return new Identity() { Token = Convert.ToBase64String(Encoding.UTF8.GetBytes("dummy_token")) };
         }
     }
 }
