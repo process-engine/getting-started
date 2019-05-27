@@ -9,4 +9,8 @@
     <PackageReference Include="ProcessEngine.ExternalTaskAPI.Client" Version="1.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\ProcessEngineClient\ProcessEngineClient.csproj" />
+  </ItemGroup>
+
 </Project>

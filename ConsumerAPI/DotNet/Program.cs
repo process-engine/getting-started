@@ -10,12 +10,6 @@
 
     class Program
     {
-        const string PROCESS_MODEL_ID= "Benutzeraktivierung";
-
-        const string START_EVENT_ID = "StartAktivierung";
-
-        const string END_EVENT_ID = "EndeAktivierung";
-
         static void Main(string[] args)
         {
             StartProcessNew().GetAwaiter().GetResult();
@@ -29,12 +23,13 @@
             ProcessStartRequest<StartPayload> request = new ProcessStartRequest<StartPayload>();
             request.Payload.ShoppingCardAmount = 1000;
 
-            Console.WriteLine($"Prozess gestartet '{PROCESS_MODEL_ID}' mit Start-Event '{START_EVENT_ID}'.");
+            Console.WriteLine($"Prozess gestartet '{"Benutzeraktivierung"}' mit Start-Event '{"StartAktivierung"}'.");
 
             var result = await client.StartProcessInstance<StartPayload, object>(
-                PROCESS_MODEL_ID, START_EVENT_ID,
+                "Benutzeraktivierung", 
+                "StartAktivierung",
                 request, 
-                END_EVENT_ID);
+                "EndeAktivierung");
    
             Console.WriteLine($"Prozess beendet (CorrelationId: '{result.CorrelationId}').");
             Console.Write("Daten: ");

@@ -5,9 +5,13 @@ namespace ProcessEngineClient
     using System.Net.Http.Headers;
     using System.Threading.Tasks;
 
-    using global::ProcessEngine.ConsumerAPI.Client;
-    using global::ProcessEngine.ConsumerAPI.Contracts;
-    using global::ProcessEngine.ConsumerAPI.Contracts.DataModel;
+    using ProcessEngine.ConsumerAPI.Client;
+    using ProcessEngine.ConsumerAPI.Contracts;
+    using ProcessEngine.ConsumerAPI.Contracts.DataModel;
+
+    using ProcessEngine.ExternalTaskAPI.Client;
+    using ProcessEngine.ExternalTaskAPI.Contracts;
+
 
     public class ProcessEngineClient 
     {
@@ -16,6 +20,9 @@ namespace ProcessEngineClient
         private Identity Identity {get; set;}
 
         private ConsumerApiClientService ConsumerApiClient { get; }
+
+        private IExternalTaskAPI ExternalTaskApi { get; }
+
 
         public ProcessEngineClient(string url) 
             : this(url, Identity.DefaultIdentity)
@@ -29,6 +36,8 @@ namespace ProcessEngineClient
             this.Identity = identity;
 
             this.ConsumerApiClient = new ConsumerApiClientService(this.HttpClient);
+
+            this.ExternalTaskApi = new ExternalTaskApiClientService(this.HttpClient);
         }
 
         public async Task<ProcessStartResponse<TResponsePayload>> StartProcessInstance<TRequestPayload, TResponsePayload>(
@@ -71,5 +80,17 @@ namespace ProcessEngineClient
 
             return response;
         }
+
+        public async Task WaitForHandle<TPayload>(string topic, HandleExternalTaskAction<TPayload> handleAction) 
+            where TPayload : new()
+        {
+            int maxTasks = 10;
+            int longpollingTimeout = 1000;
+
+            ExternalTaskWorker externalTaskWorker = new ExternalTaskWorker(this.ExternalTaskApi);
+
+            await externalTaskWorker.WaitForHandle(this.Identity.ExternalTaskIdentity, topic, maxTasks, longpollingTimeout, handleAction);
+        }
+
     }
 }

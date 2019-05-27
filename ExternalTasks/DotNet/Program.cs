@@ -10,6 +10,8 @@
     using ProcessEngine.ExternalTaskAPI.Client;
     using ProcessEngine.ExternalTaskAPI.Contracts;
 
+    using ProcessEngineClient;
+
     class Program
     {
         const string TOPIC = "AktivierungsemailSenden";
@@ -21,7 +23,28 @@
 
         static void Main(string[] args)
         {
-            RunWorker().GetAwaiter().GetResult();
+            RunWorkerNew().GetAwaiter().GetResult();
+        }
+
+        private static async Task RunWorkerNew()
+        {
+            ProcessEngineClient client = new ProcessEngineClient("http://localhost:8000");
+
+            Console.WriteLine($"Warten auf Aufgaben für das Topic '{TOPIC}'.");
+
+            await client.WaitForHandle<TestPayload>("AktivierungsemailSenden", async (externalTask) => {
+                Console.WriteLine("");
+                Console.Write("Daten: ");
+                Console.Write(JsonConvert.SerializeObject(externalTask));
+                Console.WriteLine("");
+                Console.WriteLine("");
+
+                var result = await Program.DoSomeLongWork(externalTask.Payload);
+
+                var externalTaskFinished = new ExternalTaskFinished<TestResult>(externalTask.Id, result);
+
+                return externalTaskFinished;
+            });
         }
 
         private static async Task RunWorker()
@@ -29,6 +52,8 @@
             ExternalTaskWorker externalTaskWorker = Program.CreateExternalTaskWorker("http://localhost:8000");
 
             IIdentity identity = new TestIdentity();
+
+            //identity.Token
 
             Console.WriteLine($"Warten auf Aufgaben für das Topic '{TOPIC}'.");
             
