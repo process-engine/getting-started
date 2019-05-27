@@ -1,4 +1,4 @@
-namespace LagerTeilautomatisch.ProcessEngine
+namespace ProcessEngineClient
 {
     using System;
     using System.Text;

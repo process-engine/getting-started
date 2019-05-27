@@ -6,14 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    using EssentialProjects.IAM.Contracts;
-
-    using global::ProcessEngine.ConsumerAPI.Client;
-    using global::ProcessEngine.ConsumerAPI.Contracts;
-    using global::ProcessEngine.ConsumerAPI.Contracts.DataModel;
-
-    using ProcessEngine;
-    using Identity = ProcessEngine.Identity;
+    using ProcessEngineClient;
 
     class Program
     {
@@ -41,7 +34,6 @@
             var result = await client.StartProcessInstance<StartPayload, object>(
                 PROCESS_MODEL_ID, START_EVENT_ID,
                 request, 
-                StartCallbackType.CallbackOnEndEventReached,
                 END_EVENT_ID);
    
             Console.WriteLine($"Prozess beendet (CorrelationId: '{result.CorrelationId}').");

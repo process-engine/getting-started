@@ -1,4 +1,4 @@
-namespace LagerTeilautomatisch.ProcessEngine
+namespace ProcessEngineClient
 {
     using System;
     using System.Net.Http;
@@ -9,7 +9,7 @@ namespace LagerTeilautomatisch.ProcessEngine
     using global::ProcessEngine.ConsumerAPI.Contracts;
     using global::ProcessEngine.ConsumerAPI.Contracts.DataModel;
 
-    internal class ProcessEngineClient 
+    public class ProcessEngineClient 
     {
         private HttpClient HttpClient { get; }
 
@@ -35,12 +35,13 @@ namespace LagerTeilautomatisch.ProcessEngine
             string processModelId, 
             string startEventId, 
             ProcessStartRequest<TRequestPayload> request, 
-            StartCallbackType callbackType = StartCallbackType.CallbackOnProcessInstanceCreated,
             string endEventId = "")
             where TRequestPayload : new()
             where TResponsePayload: new() 
         {
-            ProcessStartRequestPayload<TRequestPayload> payload = new ProcessStartRequestPayload<TRequestPayload>();
+            var callbackType = StartCallbackType.CallbackOnEndEventReached;
+
+            var payload = new ProcessStartRequestPayload<TRequestPayload>();
 
             payload.CallerId = request.ParentProcessInstanceId;
             payload.CorrelationId = request.CorrelationId;

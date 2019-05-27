@@ -1,4 +1,4 @@
-namespace LagerTeilautomatisch.ProcessEngine
+namespace ProcessEngineClient
 {
     using global::ProcessEngine.ConsumerAPI.Client;
     using global::ProcessEngine.ConsumerAPI.Contracts;
