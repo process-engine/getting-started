@@ -31,19 +31,22 @@ namespace LagerTeilautomatisch.ProcessEngine
             this.ConsumerApiClient = new ConsumerApiClientService(this.HttpClient);
         }
 
-        public async Task<ProcessStartResponsePayload> StartProcessInstance<TPayload>(
+        public async Task<ProcessStartResponse<TResponsePayload>> StartProcessInstance<TRequestPayload, TResponsePayload>(
             string processModelId, 
             string startEventId, 
-            ProcessStartRequest<TPayload> processStartRequestPayload, 
+            ProcessStartRequest<TRequestPayload> request, 
             StartCallbackType callbackType = StartCallbackType.CallbackOnProcessInstanceCreated,
             string endEventId = "")
-            where TPayload : new() 
+            where TRequestPayload : new()
+            where TResponsePayload: new() 
         {
-            ProcessStartRequestPayload<TPayload> payload = new ProcessStartRequestPayload<TPayload>();
+            ProcessStartRequestPayload<TRequestPayload> payload = new ProcessStartRequestPayload<TRequestPayload>();
 
-            payload.InputValues = processStartRequestPayload.Payload;
+            payload.CallerId = request.ParentProcessInstanceId;
+            payload.CorrelationId = request.CorrelationId;
+            payload.InputValues = request.Payload;
 
-            return await this.ConsumerApiClient.StartProcessInstance<TPayload>(
+            var responsePayload = await this.ConsumerApiClient.StartProcessInstance<TRequestPayload>(
                 this.Identity.InternalIdentity, 
                 processModelId,
                 startEventId,
@@ -51,6 +54,21 @@ namespace LagerTeilautomatisch.ProcessEngine
                 callbackType,
                 endEventId);
 
+            var response = new ProcessStartResponse<TResponsePayload>();
+            response.ProcessInstanceId = responsePayload.ProcessInstanceId;
+            response.CorrelationId = responsePayload.CorrelationId;
+            response.EndEventId = responsePayload.EndEventId;
+
+            try 
+            {
+                response.Payload = (TResponsePayload)responsePayload.TokenPayload;
+            } 
+            catch (Exception e) 
+            {
+                Console.WriteLine(e);
+            }
+
+            return response;
         }
     }
 }

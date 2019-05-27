@@ -38,7 +38,7 @@
 
             Console.WriteLine($"Prozess gestartet '{PROCESS_MODEL_ID}' mit Start-Event '{START_EVENT_ID}'.");
 
-            ProcessStartResponsePayload result = await client.StartProcessInstance<StartPayload>(
+            var result = await client.StartProcessInstance<StartPayload, object>(
                 PROCESS_MODEL_ID, START_EVENT_ID,
                 request, 
                 StartCallbackType.CallbackOnEndEventReached,
@@ -46,7 +46,7 @@
    
             Console.WriteLine($"Prozess beendet (CorrelationId: '{result.CorrelationId}').");
             Console.Write("Daten: ");
-            Console.WriteLine(result.TokenPayload);
+            Console.WriteLine(result.Payload);
         }
     }
 }
