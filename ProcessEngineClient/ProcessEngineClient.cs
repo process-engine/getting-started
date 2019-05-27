@@ -39,6 +39,26 @@ namespace ProcessEngineClient
 
             this.ExternalTaskApi = new ExternalTaskApiClientService(this.HttpClient);
         }
+        public async Task<ProcessStartResponse<object>> StartProcessInstance(
+            string processModelId, 
+            string startEventId, 
+            string endEventId = "")
+        {
+            var request = new ProcessStartRequest<object>();
+
+            return await this.StartProcessInstance<object, object>(processModelId, startEventId, request, endEventId);
+        }
+
+        public async Task<ProcessStartResponse<TResponsePayload>> StartProcessInstance<TResponsePayload>(
+            string processModelId, 
+            string startEventId, 
+            string endEventId = "")
+            where TResponsePayload: new() 
+        {
+            var request = new ProcessStartRequest<object>();
+
+            return await this.StartProcessInstance<object, TResponsePayload>(processModelId, startEventId, request, endEventId);
+        }
 
         public async Task<ProcessStartResponse<TResponsePayload>> StartProcessInstance<TRequestPayload, TResponsePayload>(
             string processModelId, 
@@ -81,15 +101,22 @@ namespace ProcessEngineClient
             return response;
         }
 
+        public async Task WaitForHandle<TPayload>(string topic, int maxTasks, int timeout, HandleExternalTaskAction<TPayload> handleAction) 
+            where TPayload : new()
+        {
+            ExternalTaskWorker externalTaskWorker = new ExternalTaskWorker(this.ExternalTaskApi);
+
+            await externalTaskWorker.WaitForHandle(this.Identity.ExternalTaskIdentity, topic, maxTasks, timeout, handleAction);
+
+        }
+
         public async Task WaitForHandle<TPayload>(string topic, HandleExternalTaskAction<TPayload> handleAction) 
             where TPayload : new()
         {
             int maxTasks = 10;
-            int longpollingTimeout = 1000;
+            int timeout = 1000;
 
-            ExternalTaskWorker externalTaskWorker = new ExternalTaskWorker(this.ExternalTaskApi);
-
-            await externalTaskWorker.WaitForHandle(this.Identity.ExternalTaskIdentity, topic, maxTasks, longpollingTimeout, handleAction);
+            await this.WaitForHandle<TPayload>(topic, maxTasks, timeout, handleAction);
         }
 
     }
