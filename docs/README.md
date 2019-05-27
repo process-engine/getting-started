@@ -114,6 +114,15 @@ Die Verwendung von BPMN zur Beschreibung von Abläufen in Software ist konsequen
 
 #### Tasks
 
+Tasks ermöglichen die Beinflussung des Prozesses durch die manuelle Datenerfassung oder die Ausführung von Programmcode.
+
+##### Service-Task
+
+![BPMN-Element: Service Task](images/bpmn-element-task-service.png)
+
+Ein **Service-Task** führt einen externen Service aus.
+Diese Art Task eignet sich gut, um Aufgaben an Microservices zu delegieren, wobei die Aufgaben-Delegation in REST-API-Endpunkte und External-Task-Worker unterschieden werden kann.
+
 ##### Script-Task
 
 ![BPMN-Element: Script Task](images/bpmn-element-task-script.png)
@@ -122,12 +131,12 @@ Ein **Script-Task** führt ein Skript aus.
 Das Skript ist als Eigenschaft des Tasks definiert und kann mit BPMN Studio bearbeitet werden.
 Diese Art Task eignet sich gut, um erste Prototypen größerer Features zu implementieren.
 
-##### Service-Task
+##### User-Task
 
-![BPMN-Element: Service Task](images/bpmn-element-task-service.png)
+![BPMN-Element: User Task](images/bpmn-element-task-user.png)
 
-Ein **Service-Task** führt einen externen Service aus.
-Diese Art Task eignet sich gut, um Aufgaben an Microservices zu delegieren, wobei die Aufgaben-Delegation in REST-API-Endpunkte und External-Task-Worker unterschieden werden kann.
+Ein **User-Task** fordert einen Benutzer auf, eine manuelle Aktion durchzuführen, wie bspw. die Bestätigung eines Vorgangs oder die Eingabe von Daten.
+Diese Art Task eignet sich gut, um manuelle Prozesse schrittweise zu digitalisieren.
 
 #### Gateways
 
@@ -162,7 +171,7 @@ Die ProcessEngine verfügt über eine standardisierte JSON-API zur Steuerung von
 
 Für die ProcessEngine-API existieren Clients in TypeScript, JavaScript, .NET C# und Python.
 
-Da es sich um eine offene Schnittstelle handelt, können mit geringem Aufwand Clients in anderen Sprachen erstellt werden.
+Da es sich um eine offene Schnittstelle handelt, können Clients in anderen Sprachen mit geringem Aufwand erstellt werden.
 
 ## Philosophie
 
