@@ -38,11 +38,6 @@ Das könnte für das Starten von Prozessen folgendermaßen aussehen.
 var client = new ProcessEngineClient("http://localhost:8000");
 var result = await client.StartProcessInstance('helloWorld', 'sayHello');
 ```
-```javascript
-// JavaScript
-const client = new ProcessEngineClient('http://localhost:8000');
-const result = await client.startProcessInstance('helloWorld', 'sayHello');
-```
 
 Die Parameter haben folgende Bedeutung:
 
@@ -83,13 +78,29 @@ Eine Workflow-Engine ermöglicht, Diagramme wie dieses direkt auszuführen und s
 
 ### Steuerung per BPMN Studio
 
-- Studio herunterladen
-- das Diagramm hier herunterladen
-- Studio starten
-- im Studio ist automatisch eine ProcessEngine-Instanz gestartet worden
-- nun müssen wir ein Deployment auf diese interne ProcessEngine vornehmen
-- dies geschieht per Klick auf "Deploy to ProcessEngine" (oben rechts)
-- das Diagramm kann per Klick auf "Run" ausgeführt werden
+Zunächst müssen sie BPMN Studio herunterladen, anschließend Das Diagramm herunterladen.
+Wenn Sie das Studio starten, wird automatisch eine ProcessEngine-Instanz gestartet.
+
+![BPMN Studio: Design-Modus](images/bpmn-studio-design.png)
+
+Zum Ausführen des Diagramms müssen wir ein Deployment auf diese interne ProcessEngine vornehmen.
+Dies geschieht durch einen Klick auf "Deploy to ProcessEngine" (in der Toolbar, oben rechts).
+
+![BPMN Studio: Deployment per Klick](images/bpmn-studio-design-deploy.png)
+
+Anschließend kann das Diagramm per Klick auf "Run" ausgeführt werden (ebenfalls oben rechts in der Toolbar).
+
+![BPMN Studio: Ausführen per Klick](images/bpmn-studio-design-play.png)
+
+Prozesse können mit individuellen Parametern gestartet werden.
+
+![BPMN Studio: Ausführen mit individuellen Startparametern](images/bpmn-studio-inspect-custom-start.png)
+
+Während der Ausführung können Prozesse im sog. "Live Execution Tracker" analysiert werden.
+
+![BPMN Studio: Live Execution Tracker](images/bpmn-studio-inspect-let.png)
+
+Neben der Steuerung von Prozessen mit Hilfe des BPMN Studios lassen sich die gezeigten Funktionen natürlich auch durch Skripte über die ProcessEngine API automatisieren.
 
 ### Steuerung per Skript
 
@@ -261,8 +272,7 @@ Mit Erreichen eines End-Events ist die Prozessausführung beendet.
 Die ProcessEngine verfügt über eine standardisierte JSON-API zur Steuerung von Prozessen.
 
 Für die ProcessEngine-API existieren Clients in TypeScript, JavaScript, .NET C# und Python.
-
-Da es sich um eine offen spezifizierte Schnittstelle handelt, können Clients in anderen Sprachen mit geringem Aufwand erstellt werden.
+Da es sich um eine offen spezifizierte Schnittstelle handelt, können Clients in weiteren Sprachen mit geringem Aufwand erstellt werden.
 
 ## Philosophie
 
