@@ -100,7 +100,7 @@ namespace ProcessEngineClient
             return response;
         }
 
-        public async Task WaitForHandle<TPayload>(
+        public async Task SubscribeExternalTask<TPayload>(
             string topic, 
             int maxTasks, 
             int timeout, 
@@ -113,7 +113,7 @@ namespace ProcessEngineClient
 
         }
 
-        public async Task WaitForHandle<TPayload>(
+        public async Task SubscribeExternalTask<TPayload>(
             string topic, 
             HandleExternalTaskAction<TPayload> handleAction) 
         where TPayload : new()
@@ -121,7 +121,7 @@ namespace ProcessEngineClient
             var maxTasks = 10;
             var timeout = 1000;
 
-            await this.WaitForHandle<TPayload>(topic, maxTasks, timeout, handleAction);
+            await this.SubscribeExternalTask<TPayload>(topic, maxTasks, timeout, handleAction);
         }
     }
 }
