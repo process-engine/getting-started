@@ -36,12 +36,26 @@ Viele Einführungstexte zu Programmiersprachen und anderen IT-Themen enthalten e
 
 Das könnte für die Verwendung von ProcessEngine.io in JavaScript folgendermaßen aussehen.
 
-
 ```javascript
-// TODO: ACHTUNG: Pseudo-Code! Bitte überarbeiten und diesen Kommentar entfernen!
+// JavaScript
 const client = new ProcessEngineClient('http://localhost:8000');
-const result = await client.startProcessInstance("myProcessId", "myStartEventId");
+const result = await client.startProcessInstance('helloWorld', 'sayHello');
 ```
+```csharp
+// C#
+var client = new ProcessEngineClient("http://localhost:8000");
+var result = await client.StartProcessInstance('helloWorld', 'sayHello');
+```
+
+Die Parameter haben folgende Bedeutung:
+
+* `http://localhost:8000` - die Adresse der internen ProcessEngine des BPMN Studios
+* `helloWorld` - die ID des Prozesses, den wir starten wollen
+* `sayHello` - die ID des Start-Events, das wir auslösen wollen
+
+In BPMN Studio lassen sich diese Eigenschaften bearbeiten:
+
+![BPMN Studio: Design-Modus](images/bpmn-studio-hello-world.png)
 
 Doch die Prozesse im eigenen Unternehmen sind natürlich mehr als ein Start-Aufruf.
 Um die ProcessEngine und ihre Vorzüge besser darstellen zu können, wollen wir ein Beispiel aus dem Bereich E-Commerce aufgreifen:
@@ -68,7 +82,19 @@ Nach Erstellen des Prozessdiagramms sehen wir, dass die scheinbar widersprüchli
 
 ![Prozess für Aktivierungs-E-Mails](images/Aktivierungs-E-Mails-Prozess.png)
 
-Eine Workflow-Engine ermöglicht, diese Diagramme direkt auszuführen und so zum einen die Abläufe mit allen im Team zu diskutieren (insbesondere den Fachexperten, die nicht zwingenderweise Techniker sind!) sowie Unterschiede zwischen der Dokumentation und dem Programmcode zu vermeiden.
+Eine Workflow-Engine ermöglicht, Diagramme wie dieses direkt auszuführen und so zum einen die Abläufe mit allen im Team zu diskutieren (insbesondere den Fachexperten, die nicht zwingenderweise Techniker sind!) sowie Unterschiede zwischen der Dokumentation und dem Programmcode zu vermeiden.
+
+### Steuerung per BPMN Studio
+
+- Studio herunterladen
+- das Diagramm hier herunterladen
+- Studio starten
+- im Studio ist automatisch eine ProcessEngine-Instanz gestartet worden
+- nun müssen wir ein Deployment auf diese interne ProcessEngine vornehmen
+- dies geschieht per Klick auf "Deploy to ProcessEngine" (oben rechts)
+- das Diagramm kann per Klick auf "Run" ausgeführt werden
+
+### Steuerung per Skript
 
 Die Steuerung des Diagramms aus einem Skript heraus ist denkbar einfach:
 
@@ -171,11 +197,18 @@ Die ProcessEngine verfügt über eine standardisierte JSON-API zur Steuerung von
 
 Für die ProcessEngine-API existieren Clients in TypeScript, JavaScript, .NET C# und Python.
 
-Da es sich um eine offene Schnittstelle handelt, können Clients in anderen Sprachen mit geringem Aufwand erstellt werden.
+Da es sich um eine offen spezifizierte Schnittstelle handelt, können Clients in anderen Sprachen mit geringem Aufwand erstellt werden.
 
 ## Philosophie
 
 > Philosophie der prozess-orientierten Software-Entwicklung beleuchten
 
-### Schneller zum Ziel kommen, ohne Kommunikations- und Orchestrierungsaufwände
+### Wir entwickeln Software miteinander!
 
+ProcessEngine ermöglicht die Anbindung von Microservices, nachrichtenbasierten Systemen und die leichte Verkettung von Komponenten.
+Hierdurch erreichen wir eine transparente Choreographie der angeschlossenen Systeme und Orchestrierung von Abläufen.
+
+Neu und wichtig ist, dass jeder im Team die Abläufe begreifen und validieren kann.
+Die Software dokumentiert sich dank der Verwendung von BPMN selbst.
+Das Diagramm ist Code und Dokumentation zugleich.
+So bleibt die Dokumentation immer aktuell und "lügt nie".
