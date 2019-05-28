@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ProcessEngineClient\ProcessEngineClient.csproj" />
+    <ProjectReference Include="..\ProcessEngineClient\ProcessEngineClient.csproj" />
   </ItemGroup>
 
 </Project>
