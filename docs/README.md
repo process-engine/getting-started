@@ -1,15 +1,10 @@
 # Getting Started
 
-> Hinweis: Die Texte in Zitatblöcken sind die TODOs des betreffenden Abschnitts.
-
 ProcessEngine und BPMN Studio bilden eine verteilte, quelloffene Laufzeit- und Entwicklungsumgebung für BPMN-basierte Geschäftsprozesse.
 
 ![BPMN Studio: Start-Screen](images/bpmn-studio-empty-state.png)
 
 ## BPMN Studio und die ProcessEngine
-
-> - Einführung BPMN Studio
-> - Erklären, was passiert („es startet eine ProcessEngine“)
 
 ProcessEngine.io ist die Workflow-Engine von [5Minds](https://5minds.de).
 
@@ -24,10 +19,6 @@ BPMN Studio bringt hierzu eine integrierte ProcessEngine mit, welche automatisch
 
 
 ## Das "Hello World" der digitalen Transformation
-
-> - Beispiel-Prozess
-> - Code-Beispiele
-> - hier bewusst noch keine Erklärung der Elemente - im Vordergrund steht der schnelle Zugang zu den Grundideen und zum Code
 
 Viele Einführungstexte zu Programmiersprachen und anderen IT-Themen enthalten ein sog. "Hello World", ein bewusst einfach gehaltenes Beispiel, welches die jeweilige Technologie in ihren Grundzügen präsentiert.
 
@@ -193,10 +184,6 @@ internal class Program
 ```
 
 
-> Hinweis: Mit Abschluss dieses Abschnitts sollte der Leser die Domäne von ProcessEngine/Studio verstanden haben.
-> Die folgenden Abschnitte dienen der Vollständigkeit und tieferen Darstellung der Domäne.
-> **Alles wirklich notwendige sollte aber bis hierhin bereits angeführt worden sein.**
-
 ## Prozesse modellieren
 
 ### Was ist BPMN?
@@ -267,16 +254,12 @@ Mit Erreichen eines End-Events ist die Prozessausführung beendet.
 
 ### ProcessEngine: Clients in vielen Programmiersprachen und eine standardisierte JSON-API
 
-> Beschreiben, dass es Clients gibt und was man mit denen machen kann
-
 Die ProcessEngine verfügt über eine standardisierte JSON-API zur Steuerung von Prozessen.
 
 Für die ProcessEngine-API existieren Clients in TypeScript, JavaScript, .NET C# und Python.
 Da es sich um eine offen spezifizierte Schnittstelle handelt, können Clients in weiteren Sprachen mit geringem Aufwand erstellt werden.
 
 ## Philosophie
-
-> Philosophie der prozess-orientierten Software-Entwicklung beleuchten
 
 ### Wir entwickeln Software miteinander!
 
@@ -287,3 +270,5 @@ Neu und wichtig ist, dass jeder im Team die Abläufe begreifen und validieren ka
 Die Software dokumentiert sich dank der Verwendung von BPMN selbst.
 Das Diagramm ist Code und Dokumentation zugleich.
 So bleibt die Dokumentation immer aktuell und "lügt nie".
+
+Wenn Sie noch weitere Fragen haben, so [kontaktieren Sie doch das Team von 5Minds](https://5minds.de)!
