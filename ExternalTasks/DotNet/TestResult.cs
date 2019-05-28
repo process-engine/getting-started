@@ -2,6 +2,6 @@ namespace EtikettAusdrucken
 {
     internal class TestResult
     {
-        public string TestProperty { get; set; }
+        public int ShoppingCardAmount { get; set; }
     }
 }

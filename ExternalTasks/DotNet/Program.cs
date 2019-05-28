@@ -10,68 +10,47 @@
     using ProcessEngine.ExternalTaskAPI.Client;
     using ProcessEngine.ExternalTaskAPI.Contracts;
 
-    class Program
+    using ProcessEngineClient;
+
+    internal class Program
     {
-        const string TOPIC = "Etikett-ausdrucken";
-
-        const int MAX_TASKS = 10;
-
-        const int POLLING_TIMEOUT = 1000;
-        const int WAIT_TIMEOUT = 10000;
-
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            RunWorker().GetAwaiter().GetResult();
+            RunSampleExternalTaskWorker().GetAwaiter().GetResult();
         }
 
-        private static async Task RunWorker()
+        private static async Task RunSampleExternalTaskWorker()
         {
-            ExternalTaskWorker externalTaskWorker = Program.CreateExternalTaskWorker("http://localhost:8000");
+            var client = new ProcessEngineClient("http://localhost:8000");
 
-            IIdentity identity = new TestIdentity();
+            Console.WriteLine("Warten auf Aufgaben für das Topic 'AktivierungsemailSenden'.");
 
-            Console.WriteLine($"Warten auf Aufgaben für das Topic '{TOPIC}'.");
-            
-            await externalTaskWorker.WaitForHandle<TestPayload>(identity, TOPIC, MAX_TASKS, POLLING_TIMEOUT, async (externalTask) =>
-            {
+            await client.WaitForHandle<TestPayload>("AktivierungsemailSenden", async (externalTask) => {
                 Console.WriteLine("");
                 Console.Write("Daten: ");
                 Console.Write(JsonConvert.SerializeObject(externalTask));
                 Console.WriteLine("");
                 Console.WriteLine("");
 
-                var result = await Program.DoSomeLongWork();
+                var result = await DoSomeLongWork(externalTask.Payload);
 
                 var externalTaskFinished = new ExternalTaskFinished<TestResult>(externalTask.Id, result);
 
                 return externalTaskFinished;
             });
-        } 
+        }
 
-        private async static Task<TestResult> DoSomeLongWork() 
+        private async static Task<TestResult> DoSomeLongWork(TestPayload payload) 
         {
             var result = new TestResult();
-            result.TestProperty = "Dies ist das Ergebnis vom DotNet-External-Task.";
+            result.ShoppingCardAmount = payload.ShoppingCardAmount;
 
-            Console.WriteLine($"Warte für {WAIT_TIMEOUT} Millisekunden.");
-            await Task.Delay(WAIT_TIMEOUT);
+            Console.WriteLine("Warte für 10000 Millisekunden.");
+            await Task.Delay(10000);
 
             Console.WriteLine("Bearbeitung fertig!");
 
             return result;
-        }
-
-        private static ExternalTaskWorker CreateExternalTaskWorker(string url) 
-        {
-            HttpClient httpClient = new HttpClient();
-
-            httpClient.BaseAddress = new Uri(url);
-
-            IExternalTaskAPI externalTaskApi = new ExternalTaskApiClientService(httpClient);
-
-            ExternalTaskWorker externalTaskWorker = new ExternalTaskWorker(externalTaskApi);
-
-            return externalTaskWorker;   
         }
     }
 }

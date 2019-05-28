@@ -2,6 +2,6 @@ namespace EtikettAusdrucken
 {
     internal class TestPayload
     {
-        public string Prop { get; set; }
+        public int ShoppingCardAmount { get; set; }
     }
 }
