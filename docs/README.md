@@ -80,7 +80,7 @@ Nehmen Sie folgende Kette an Anforderungen aus einer E-Mail-Konversation:
 
 Nach Erstellen des Prozessdiagramms sehen wir, dass die scheinbar widersprüchlichen Anforderungen weniger konfus sind als gedacht:
 
-![Prozess für Aktivierungs-E-Mails](images/Aktivierungs-E-Mails-Prozess.png)
+![Prozess für Aktivierungs-E-Mails](images/Prozess-Aktivierungs-E-Mails.png)
 
 Eine Workflow-Engine ermöglicht, Diagramme wie dieses direkt auszuführen und so zum einen die Abläufe mit allen im Team zu diskutieren (insbesondere den Fachexperten, die nicht zwingenderweise Techniker sind!) sowie Unterschiede zwischen der Dokumentation und dem Programmcode zu vermeiden.
 
@@ -96,26 +96,94 @@ Eine Workflow-Engine ermöglicht, Diagramme wie dieses direkt auszuführen und s
 
 ### Steuerung per Skript
 
-Die Steuerung des Diagramms aus einem Skript heraus ist denkbar einfach:
+### Starten von Prozessen
 
-```javascript
-// TODO: ACHTUNG: Pseudo-Code! Bitte überarbeiten und diesen Kommentar entfernen!
-const client = new ProcessEngineClient('http://localhost:8000', optionalIdentity);
-// und ProcessEngineAdminClient
+Die Steuerung des Diagramms aus einem Skript heraus ist denkbar einfach.
 
-const result = await client.startProcessInstance(PROCESS_MODEL_ID, START_EVENT_ID, END_EVENT_ID);
+Wie weiter oben bereits angedeutet, lassen sich Prozesse nach dem Deployment (das muss mit BPMN Studio erfolgen) mit Hilfe des `ProcessEngineClient` starten:
 
-// TODO: ACHTUNG: Pseudo-Code! Bitte überarbeiten und diesen Kommentar entfernen!
-client.subscribeExternalTaskWorker(TOPIC, async (externalTask) => {
-    let result = await doSomeLongWork();
+```csharp
+// C#
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        StartNewProcessInstance().GetAwaiter().GetResult();
+    }
 
-    let externalTaskFinished = new ExternalTaskFinished(externalTask.id, result);
+    private static async Task StartNewProcessInstance()
+    {
+        var client = new ProcessEngineClient("http://localhost:8000");
 
-    return externalTaskFinished;
-  }
-);
+        var request = new ProcessStartRequest<StartPayload>();
+        request.Payload.ShoppingCardAmount = 1000;
 
+        Console.WriteLine("Prozess 'Benutzeraktivierung' mit Start-Event 'StartAktivierung' gestartet.");
+
+        var result = await client.StartProcessInstance<StartPayload, object>(
+            "Benutzeraktivierung",
+            "StartAktivierung",
+            request,
+            "EndeAktivierung");
+
+        Console.WriteLine($"Prozess beendet (CorrelationId: '{result.CorrelationId}').");
+        Console.Write("Daten: ");
+        Console.WriteLine(result.Payload);
+    }
+}
 ```
+
+### Erstellen von External Task Workern
+
+Das "External Task Pattern" sieht vor, dass zu erledigende Arbeiten in einem vereinheitlichten Arbeitsvorrat hinterlegt werden.
+Dort können sie von "External Task Workern" abgeholt und bearbeitet werden.
+Durch diese Entkopplung können die Worker in jeder beliebigen Programmiersprache implementiert werden.
+Der zuständige Worker hinterlegt anschließend das Arbeitsergebnis im Arbeitsvorrat, wo die ProcessEngine es abholen und mit der Prozessausführung fortführen kann.
+
+Das Pattern stellt somit eine Alternative zur Anbindung von REST-Service-Endpunkten dar.
+
+Die folgende Abbildung stellt beide Konzepte gegenüber:
+
+![Erklärung: External Task Pattern](./images/erklaerung-external-task-pattern.png)
+
+
+Ein ExternalTaskWorker für den External Task "Aktivierungs-E-Mail versenden" aus unserem Online-Shop-Beispiel könnte wie folgt aussehen:
+
+```csharp
+// C#
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        RunSampleExternalTaskWorker().GetAwaiter().GetResult();
+    }
+
+    private static async Task RunSampleExternalTaskWorker()
+    {
+        var client = new ProcessEngineClient("http://localhost:8000");
+
+        await client.WaitForHandle<TestPayload>("AktivierungsemailSenden", async (externalTask) => {
+            var result = await DoSomeLongWork(externalTask.Payload);
+
+            var externalTaskFinished = new ExternalTaskFinished<TestResult>(externalTask.Id, result);
+
+            return externalTaskFinished;
+        });
+    }
+
+    private async static Task<TestResult> DoSomeLongWork(TestPayload payload)
+    {
+        var result = new TestResult();
+        result.ShoppingCardAmount = payload.ShoppingCardAmount;
+
+        // zur Simulation einer rechenintensiven Aufgabe
+        await Task.Delay(10000);
+
+        return result;
+    }
+}
+```
+
 
 > Hinweis: Mit Abschluss dieses Abschnitts sollte der Leser die Domäne von ProcessEngine/Studio verstanden haben.
 > Die folgenden Abschnitte dienen der Vollständigkeit und tieferen Darstellung der Domäne.
