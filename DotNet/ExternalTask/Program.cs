@@ -25,7 +25,7 @@
 
             Console.WriteLine("Warten auf Aufgaben für das Topic 'AktivierungsemailSenden'.");
 
-            await client.SubscribeExternalTask<TestPayload>("AktivierungsemailSenden", async (externalTask) => {
+            await client.SubscribeToExternalTasksWithTopic<TestPayload>("AktivierungsemailSenden", async (externalTask) => {
                 Console.WriteLine("");
                 Console.Write("Daten: ");
                 Console.Write(JsonConvert.SerializeObject(externalTask));
