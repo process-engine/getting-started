@@ -20,10 +20,7 @@ ProcessEngine.io unterstützt somit eine zielgerichtete, iterative Entwicklung u
 ![BPMN Studio: Design-Modus](images/bpmn-studio-design.png)
 
 Mit BPMN Studio kann der Benutzer nicht nur Prozesse durchdenken, entwerfen und validieren, sondern sie auch direkt in BPMN Studio ausführen.
-BPMN Studio bringt hierzu eine integrierte ProcessEngine mit, welche es jedem ermöglicht, seine Prozesse auch ohne Serverlandschaft auszuführen.
-
-Wenn BPMN Studio startet, startet sich auch eine ProcessEngine, ohne, dass der Benutzer hierzu etwas tun muss.
-
+BPMN Studio bringt hierzu eine integrierte ProcessEngine mit, welche automatisch gestartet wird und es jedem ermöglicht, seine Prozesse auch ohne Serverlandschaft auszuführen.
 
 
 ## Das "Hello World" der digitalen Transformation
@@ -34,17 +31,17 @@ Wenn BPMN Studio startet, startet sich auch eine ProcessEngine, ohne, dass der B
 
 Viele Einführungstexte zu Programmiersprachen und anderen IT-Themen enthalten ein sog. "Hello World", ein bewusst einfach gehaltenes Beispiel, welches die jeweilige Technologie in ihren Grundzügen präsentiert.
 
-Das könnte für die Verwendung von ProcessEngine.io in JavaScript folgendermaßen aussehen.
+Das könnte für das Starten von Prozessen folgendermaßen aussehen.
 
-```javascript
-// JavaScript
-const client = new ProcessEngineClient('http://localhost:8000');
-const result = await client.startProcessInstance('helloWorld', 'sayHello');
-```
 ```csharp
 // C#
 var client = new ProcessEngineClient("http://localhost:8000");
 var result = await client.StartProcessInstance('helloWorld', 'sayHello');
+```
+```javascript
+// JavaScript
+const client = new ProcessEngineClient('http://localhost:8000');
+const result = await client.startProcessInstance('helloWorld', 'sayHello');
 ```
 
 Die Parameter haben folgende Bedeutung:
