@@ -8,22 +8,21 @@
 
     using ProcessEngineClient;
 
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            StartProcessNew().GetAwaiter().GetResult();
+            StartNewProcessInstance().GetAwaiter().GetResult();
         }
 
-        static async Task StartProcessNew() 
+        private static async Task StartNewProcessInstance() 
         {
-            //ProcessEngineClient client = new ProcessEngineClient("http://localhost:8000", Identity.DefaultIdentity);
-            ProcessEngineClient client = new ProcessEngineClient("http://localhost:8000");
+            var client = new ProcessEngineClient("http://localhost:8000");
 
-            ProcessStartRequest<StartPayload> request = new ProcessStartRequest<StartPayload>();
+            var request = new ProcessStartRequest<StartPayload>();
             request.Payload.ShoppingCardAmount = 1000;
 
-            Console.WriteLine($"Prozess gestartet '{"Benutzeraktivierung"}' mit Start-Event '{"StartAktivierung"}'.");
+            Console.WriteLine("Prozess 'Benutzeraktivierung' mit Start-Event 'StartAktivierung' gestartet.");
 
             var result = await client.StartProcessInstance<StartPayload, object>(
                 "Benutzeraktivierung", 

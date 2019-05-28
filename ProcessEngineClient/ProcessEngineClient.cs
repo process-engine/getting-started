@@ -12,7 +12,6 @@ namespace ProcessEngineClient
     using ProcessEngine.ExternalTaskAPI.Client;
     using ProcessEngine.ExternalTaskAPI.Contracts;
 
-
     public class ProcessEngineClient 
     {
         private HttpClient HttpClient { get; }
@@ -22,7 +21,6 @@ namespace ProcessEngineClient
         private ConsumerApiClientService ConsumerApiClient { get; }
 
         private IExternalTaskAPI ExternalTaskApi { get; }
-
 
         public ProcessEngineClient(string url) 
             : this(url, Identity.DefaultIdentity)
@@ -39,6 +37,7 @@ namespace ProcessEngineClient
 
             this.ExternalTaskApi = new ExternalTaskApiClientService(this.HttpClient);
         }
+
         public async Task<ProcessStartResponse<object>> StartProcessInstance(
             string processModelId, 
             string startEventId, 
@@ -53,7 +52,7 @@ namespace ProcessEngineClient
             string processModelId, 
             string startEventId, 
             string endEventId = "")
-            where TResponsePayload: new() 
+        where TResponsePayload: new() 
         {
             var request = new ProcessStartRequest<object>();
 
@@ -65,8 +64,8 @@ namespace ProcessEngineClient
             string startEventId, 
             ProcessStartRequest<TRequestPayload> request, 
             string endEventId = "")
-            where TRequestPayload : new()
-            where TResponsePayload: new() 
+        where TRequestPayload : new()
+        where TResponsePayload : new() 
         {
             var callbackType = StartCallbackType.CallbackOnEndEventReached;
 
@@ -101,23 +100,28 @@ namespace ProcessEngineClient
             return response;
         }
 
-        public async Task WaitForHandle<TPayload>(string topic, int maxTasks, int timeout, HandleExternalTaskAction<TPayload> handleAction) 
-            where TPayload : new()
+        public async Task WaitForHandle<TPayload>(
+            string topic, 
+            int maxTasks, 
+            int timeout, 
+            HandleExternalTaskAction<TPayload> handleAction) 
+        where TPayload : new()
         {
-            ExternalTaskWorker externalTaskWorker = new ExternalTaskWorker(this.ExternalTaskApi);
+            var externalTaskWorker = new ExternalTaskWorker(this.ExternalTaskApi);
 
             await externalTaskWorker.WaitForHandle(this.Identity.ExternalTaskIdentity, topic, maxTasks, timeout, handleAction);
 
         }
 
-        public async Task WaitForHandle<TPayload>(string topic, HandleExternalTaskAction<TPayload> handleAction) 
-            where TPayload : new()
+        public async Task WaitForHandle<TPayload>(
+            string topic, 
+            HandleExternalTaskAction<TPayload> handleAction) 
+        where TPayload : new()
         {
-            int maxTasks = 10;
-            int timeout = 1000;
+            var maxTasks = 10;
+            var timeout = 1000;
 
             await this.WaitForHandle<TPayload>(topic, maxTasks, timeout, handleAction);
         }
-
     }
 }

@@ -12,25 +12,18 @@
 
     using ProcessEngineClient;
 
-    class Program
+    internal class Program
     {
-        const string TOPIC = "AktivierungsemailSenden";
-
-        const int MAX_TASKS = 10;
-
-        const int POLLING_TIMEOUT = 1000;
-        const int WAIT_TIMEOUT = 10000;
-
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            RunWorkerNew().GetAwaiter().GetResult();
+            RunSampleExternalTaskWorker().GetAwaiter().GetResult();
         }
 
-        private static async Task RunWorkerNew()
+        private static async Task RunSampleExternalTaskWorker()
         {
-            ProcessEngineClient client = new ProcessEngineClient("http://localhost:8000");
+            var client = new ProcessEngineClient("http://localhost:8000");
 
-            Console.WriteLine($"Warten auf Aufgaben für das Topic '{TOPIC}'.");
+            Console.WriteLine("Warten auf Aufgaben für das Topic 'AktivierungsemailSenden'.");
 
             await client.WaitForHandle<TestPayload>("AktivierungsemailSenden", async (externalTask) => {
                 Console.WriteLine("");
@@ -39,7 +32,7 @@
                 Console.WriteLine("");
                 Console.WriteLine("");
 
-                var result = await Program.DoSomeLongWork(externalTask.Payload);
+                var result = await DoSomeLongWork(externalTask.Payload);
 
                 var externalTaskFinished = new ExternalTaskFinished<TestResult>(externalTask.Id, result);
 
@@ -47,14 +40,13 @@
             });
         }
 
-
         private async static Task<TestResult> DoSomeLongWork(TestPayload payload) 
         {
             var result = new TestResult();
             result.ShoppingCardAmount = payload.ShoppingCardAmount;
 
-            Console.WriteLine($"Warte für {WAIT_TIMEOUT} Millisekunden.");
-            await Task.Delay(WAIT_TIMEOUT);
+            Console.WriteLine("Warte für 10000 Millisekunden.");
+            await Task.Delay(10000);
 
             Console.WriteLine("Bearbeitung fertig!");
 
