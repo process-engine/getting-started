@@ -55,12 +55,12 @@ In BPMN Studio lassen sich diese Eigenschaften bearbeiten:
 ![BPMN Studio: Design-Modus](images/bpmn-studio-hello-world.png)
 
 Doch die Prozesse im eigenen Unternehmen sind natürlich mehr als ein Start-Aufruf.
-Um die ProcessEngine und ihre Vorzüge besser darstellen zu können, wollen wir ein Beispiel aus dem Bereich E-Commerce aufgreifen:
+Um die ProcessEngine und ihre Vorzüge besser darstellen zu können, wollen wir daher ein Beispiel aus dem Bereich E-Commerce aufgreifen:
 
 **Der Online-Shop**
 
 In einem Online-Shop sollen Nutzer im Rahmen der Registrierung einen Rabattcode erhalten.
-Nutzer, die besonders viel bestellen, sollen zudem einen sog. Reseller-Code erhalten, der ihnen ermöglicht besondere Mengen-Rabatte zu aktivieren.
+Nutzer, die besonders viel Ware bestellen, sollen zudem einen sog. Reseller-Code erhalten, der ihnen ermöglicht besondere Mengen-Rabatte zu aktivieren.
 
 Üblicherweise werden diese Regeln in vielen, vielen E-Mails und Gesprächen kommuniziert, bevor sie dann im Programmcode niedergeschrieben werden.
 Regelmäßig scheinen einige der Anforderungen sich zu widersprechen, so dass Techniker und Nicht-Techniker in einen intensiven Dialog treten müssen, um herauszufinden, wo sich "Wunsch und Wirklichkeit" unterscheiden.
