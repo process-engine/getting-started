@@ -20,10 +20,10 @@ steps:
   workingDirectory: JavaScript/CreateProcessInstance
   displayName: 'npm install'
 
-- script: npm run build
-  workingDirectory: JavaScript/CreateProcessInstance
-  displayName: 'npm run build'
+# - script: npm run build
+#   workingDirectory: JavaScript/CreateProcessInstance
+#   displayName: 'npm run build'
 
-- script: npm test
-  workingDirectory: JavaScript/CreateProcessInstance
-  displayName: 'npm test'
+# - script: npm test
+#   workingDirectory: JavaScript/CreateProcessInstance
+#   displayName: 'npm test'
