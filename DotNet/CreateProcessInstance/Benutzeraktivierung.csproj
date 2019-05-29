@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\process_engine_client\dotnet\src\ProcessEngineClient.csproj" />
+  </ItemGroup>
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ProcessEngineClient\ProcessEngineClient.csproj" />
-  </ItemGroup>
 
 </Project>
