@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../process_engine_client/dotnet/src/ProcessEngineClient.csproj" />
+    <ProjectReference Include="../../../process_engine_client/dotnet/src/ProcessEngineClient.csproj" />
   </ItemGroup>
 
 </Project>
