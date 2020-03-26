@@ -3,10 +3,18 @@
   "version": "1.0.0",
   "description": "Der Client zum Ausführen des Task für 'Etikett drucken'",
   "main": "main.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
+    "build": "rm -rf dist && tsc",
     "start": "node main.js"
   },
   "author": "Martin Moellenbeck <Martin.Moellenbeck@5Minds.de>",
+  "maintainers": [
+    "Alexander Kasten <alexander.kasten@5minds.de>",
+    "Christian Werner <christian.werner@5minds.de>",
+    "René Föhring <rene.foehring@5minds.de>",
+    "Steffen Knaup <steffen.knaup@5minds.de>"
+  ],
   "license": "MIT",
   "dependencies": {
     "@essential-projects/http": "^2.5.0",
@@ -14,5 +22,9 @@
     "@process-engine/consumer_api_client": "^6.4.0",
     "@process-engine/consumer_api_contracts": "^10.0.0",
     "moment": "^2.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.31",
+    "typescript": "^3.8.3"
   }
 }
