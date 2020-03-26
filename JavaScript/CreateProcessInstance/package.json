@@ -2,16 +2,25 @@
   "name": "consumer_api_sample",
   "version": "1.0.0",
   "description": "Ein Beispiel für die Verwendung der ConsumerAPI zum Starten eines Prozesses",
-  "main": "main.js",
+  "main": "dist/commonjs/main.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
+    "build": "rm -rf dist && tsc",
     "start": "node main.js"
   },
   "author": "Martin Moellenbeck <Martin.Moellenbeck@5Minds.de>",
+  "maintainers": [
+    "Christian Werner <christian.werner@5minds.de>"
+  ],
   "license": "MIT",
   "dependencies": {
     "@essential-projects/http": "^2.5.0",
     "@essential-projects/iam_contracts": "^3.6.3",
     "@process-engine/consumer_api_client": "^6.4.0",
     "@process-engine/consumer_api_contracts": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.31",
+    "typescript": "^3.8.3"
   }
 }
