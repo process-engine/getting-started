@@ -9,9 +9,9 @@
   "author": "Martin Moellenbeck <Martin.Moellenbeck@5Minds.de>",
   "license": "MIT",
   "dependencies": {
-    "@essential-projects/http": "^2.3.1",
-    "@essential-projects/iam_contracts": "^3.4.2",
-    "@process-engine/consumer_api_client": "^5.0.0",
-    "@process-engine/consumer_api_contracts": "^5.1.1"
+    "@essential-projects/http": "^2.5.0",
+    "@essential-projects/iam_contracts": "^3.6.3",
+    "@process-engine/consumer_api_client": "^6.4.0",
+    "@process-engine/consumer_api_contracts": "^10.0.0"
   }
 }
