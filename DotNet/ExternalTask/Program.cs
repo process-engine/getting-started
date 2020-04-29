@@ -4,9 +4,9 @@
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Threading.Tasks;
-    
+
     using Newtonsoft.Json;
-    
+
     using ProcessEngine.ExternalTaskAPI.Client;
     using ProcessEngine.ExternalTaskAPI.Contracts;
 
@@ -21,7 +21,7 @@
 
         private static async Task RunSampleExternalTaskWorker()
         {
-            var client = new ProcessEngineClient("http://localhost:8000");
+            var client = new ProcessEngineClient("http://localhost:56000");
 
             Console.WriteLine("Warten auf Aufgaben für das Topic 'AktivierungsemailSenden'.");
 
@@ -40,7 +40,7 @@
             });
         }
 
-        private async static Task<TestResult> DoSomeLongWork(TestPayload payload) 
+        private async static Task<TestResult> DoSomeLongWork(TestPayload payload)
         {
             var result = new TestResult();
             result.ShoppingCardAmount = payload.ShoppingCardAmount;

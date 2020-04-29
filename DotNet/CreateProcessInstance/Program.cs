@@ -15,9 +15,9 @@
             StartNewProcessInstance().GetAwaiter().GetResult();
         }
 
-        private static async Task StartNewProcessInstance() 
+        private static async Task StartNewProcessInstance()
         {
-            var client = new ProcessEngineClient("http://localhost:8000");
+            var client = new ProcessEngineClient("http://localhost:56000");
 
             var request = new ProcessStartRequest<StartPayload>();
             request.Payload.ShoppingCardAmount = 1000;
@@ -25,11 +25,11 @@
             Console.WriteLine("Prozess 'Benutzeraktivierung' mit Start-Event 'StartAktivierung' gestartet.");
 
             var result = await client.StartProcessInstance<StartPayload, object>(
-                "Benutzeraktivierung", 
+                "Benutzeraktivierung",
                 "StartAktivierung",
-                request, 
+                request,
                 "EndeAktivierung");
-   
+
             Console.WriteLine($"Prozess beendet (CorrelationId: '{result.CorrelationId}').");
             Console.Write("Daten: ");
             Console.WriteLine(result.Payload);
