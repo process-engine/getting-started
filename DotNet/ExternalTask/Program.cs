@@ -1,14 +1,10 @@
 ﻿namespace EtikettAusdrucken
 {
     using System;
-    using System.Net.Http;
-    using System.Net.Http.Headers;
     using System.Threading.Tasks;
 
     using Newtonsoft.Json;
-
-    using ProcessEngine.ExternalTaskAPI.Client;
-    using ProcessEngine.ExternalTaskAPI.Contracts;
+    using ProcessEngine.ConsumerAPI.Contracts.DataModel;
 
     using ProcessEngineClient;
 
@@ -25,7 +21,7 @@
 
             Console.WriteLine("Warten auf Aufgaben für das Topic 'AktivierungsemailSenden'.");
 
-            await client.SubscribeToExternalTasksWithTopic<TestPayload>("AktivierungsemailSenden", async (externalTask) => {
+            await client.SubscribeToExternalTasksWithTopic<TestPayload, Task<TestResult>>("AktivierungsemailSenden", async (externalTask) => {
                 Console.WriteLine("");
                 Console.Write("Daten: ");
                 Console.Write(JsonConvert.SerializeObject(externalTask));
@@ -34,16 +30,21 @@
 
                 var result = await DoSomeLongWork(externalTask.Payload);
 
-                var externalTaskFinished = new ExternalTaskFinished<TestResult>(externalTask.Id, result);
+                var externalTaskFinished = new ExternalTaskSuccessResult<TestResult>(externalTask.Id, result);
 
                 return externalTaskFinished;
             });
         }
 
-        private async static Task<TestResult> DoSomeLongWork(TestPayload payload)
+        private async static Task<TestResult> DoSomeLongWork<TPayload>(TPayload payload)
         {
+            if (!(payload is TestPayload testPayload))
+            {
+                return null;
+            }
+
             var result = new TestResult();
-            result.ShoppingCardAmount = payload.ShoppingCardAmount;
+            result.ShoppingCardAmount = testPayload.ShoppingCardAmount;
 
             Console.WriteLine("Warte für 10000 Millisekunden.");
             await Task.Delay(10000);

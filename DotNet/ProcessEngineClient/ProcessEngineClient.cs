@@ -7,12 +7,12 @@ namespace ProcessEngineClient
 
     using ProcessEngine.ConsumerAPI.Client;
     using ProcessEngine.ConsumerAPI.Contracts;
+    using ProcessEngine.ConsumerAPI.Contracts.APIs;
     using ProcessEngine.ConsumerAPI.Contracts.DataModel;
 
     using ProcessEngine.ExternalTaskAPI.Client;
-    using ProcessEngine.ExternalTaskAPI.Contracts;
 
-    public class ProcessEngineClient 
+    public class ProcessEngineClient
     {
         private HttpClient HttpClient { get; }
 
@@ -20,14 +20,14 @@ namespace ProcessEngineClient
 
         private ConsumerApiClientService ConsumerApiClient { get; }
 
-        private IExternalTaskAPI ExternalTaskApi { get; }
+        private IExternalTaskConsumerApi ExternalTaskApi { get; }
 
-        public ProcessEngineClient(string url) 
+        public ProcessEngineClient(string url)
             : this(url, Identity.DefaultIdentity)
-        {   
+        {
         }
 
-        public ProcessEngineClient(string url, Identity identity) 
+        public ProcessEngineClient(string url, Identity identity)
         {
             this.HttpClient = new HttpClient();
             this.HttpClient.BaseAddress = new Uri(url);
@@ -39,8 +39,8 @@ namespace ProcessEngineClient
         }
 
         public async Task<ProcessStartResponse<object>> StartProcessInstance(
-            string processModelId, 
-            string startEventId, 
+            string processModelId,
+            string startEventId,
             string endEventId = "")
         {
             var request = new ProcessStartRequest<object>();
@@ -49,10 +49,10 @@ namespace ProcessEngineClient
         }
 
         public async Task<ProcessStartResponse<TResponsePayload>> StartProcessInstance<TResponsePayload>(
-            string processModelId, 
-            string startEventId, 
+            string processModelId,
+            string startEventId,
             string endEventId = "")
-        where TResponsePayload: new() 
+        where TResponsePayload: new()
         {
             var request = new ProcessStartRequest<object>();
 
@@ -60,12 +60,12 @@ namespace ProcessEngineClient
         }
 
         public async Task<ProcessStartResponse<TResponsePayload>> StartProcessInstance<TRequestPayload, TResponsePayload>(
-            string processModelId, 
-            string startEventId, 
-            ProcessStartRequest<TRequestPayload> request, 
+            string processModelId,
+            string startEventId,
+            ProcessStartRequest<TRequestPayload> request,
             string endEventId = "")
         where TRequestPayload : new()
-        where TResponsePayload : new() 
+        where TResponsePayload : new()
         {
             var callbackType = StartCallbackType.CallbackOnEndEventReached;
 
@@ -76,7 +76,7 @@ namespace ProcessEngineClient
             payload.InputValues = request.Payload;
 
             var responsePayload = await this.ConsumerApiClient.StartProcessInstance<TRequestPayload>(
-                this.Identity.InternalIdentity, 
+                this.Identity.InternalIdentity,
                 processModelId,
                 startEventId,
                 payload,
@@ -88,11 +88,11 @@ namespace ProcessEngineClient
             response.CorrelationId = responsePayload.CorrelationId;
             response.EndEventId = responsePayload.EndEventId;
 
-            try 
+            try
             {
                 response.Payload = (TResponsePayload)responsePayload.TokenPayload;
-            } 
-            catch (Exception e) 
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e);
             }
@@ -100,28 +100,30 @@ namespace ProcessEngineClient
             return response;
         }
 
-        public async Task SubscribeToExternalTasksWithTopic<TPayload>(
-            string topic, 
-            int maxTasks, 
-            int timeout, 
-            HandleExternalTaskAction<TPayload> handleAction) 
+        public async Task SubscribeToExternalTasksWithTopic<TPayload, TResult>(
+            string topic,
+            int maxTasks,
+            int timeout,
+            HandleExternalTaskAction<TPayload, TResult> handleAction)
         where TPayload : new()
         {
-            var externalTaskWorker = new ExternalTaskWorker(this.ExternalTaskApi);
+            var externalTaskWorker = new ProcessEngine.ExternalTaskAPI.Client.ExternalTaskWorker<TPayload, TResult>(
+                this.HttpClient.BaseAddress.ToString(),
+                this.Identity.ExternalTaskIdentity, topic, maxTasks, timeout, handleAction);
 
-            await externalTaskWorker.WaitForHandle(this.Identity.ExternalTaskIdentity, topic, maxTasks, timeout, handleAction);
+            externalTaskWorker.Start();
 
         }
 
-        public async Task SubscribeToExternalTasksWithTopic<TPayload>(
-            string topic, 
-            HandleExternalTaskAction<TPayload> handleAction) 
+        public async Task SubscribeToExternalTasksWithTopic<TPayload, TResult>(
+            string topic,
+            HandleExternalTaskAction<TPayload, TResult> handleAction)
         where TPayload : new()
         {
             var maxTasks = 10;
             var timeout = 1000;
 
-            await this.SubscribeToExternalTasksWithTopic<TPayload>(topic, maxTasks, timeout, handleAction);
+            await this.SubscribeToExternalTasksWithTopic(topic, maxTasks, timeout, handleAction);
         }
     }
 }
