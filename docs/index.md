@@ -1,6 +1,6 @@
 # Getting Started
 
-ProcessEngine und BPMN Studio bilden eine verteilte, quelloffene Laufzeit- und Entwicklungsumgebung für BPMN-basierte Geschäftsprozesse.
+ProcessEngine und BPMN-Studio bilden eine verteilte, quelloffene Laufzeit- und Entwicklungsumgebung für BPMN-basierte Geschäftsprozesse.
 
 ![BPMN Studio: Start-Screen](images/bpmn-studio-empty-state.png)
 
