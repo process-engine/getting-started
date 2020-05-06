@@ -99,7 +99,7 @@ Neben der Steuerung von Prozessen mit Hilfe des BPMN Studios lassen sich die gez
 
 Die Steuerung des Diagramms aus einem Skript heraus ist denkbar einfach.
 
-Wie weiter oben bereits angedeutet, lassen sich Prozesse nach dem Deployment (das muss mit BPMN Studio erfolgen) mit Hilfe des `ProcessEngineClient` starten:
+Wie weiter oben bereits angedeutet, lassen sich Prozesse nach dem Deployment (das muss mit BPMN Studio erfolgen) mit Hilfe des [`ProcessEngineClient`](https://github.com/process-engine/getting-started/tree/develop/DotNet) starten:
 
 ```csharp
 // C#
@@ -131,6 +131,7 @@ internal class Program
     }
 }
 ```
+Standardmäßig wird der Prozess auf Port 56000 gestartet. Dieser Port steht für die stable-Version, der für den Kunden bereitgestellt ist. Der Port 56001 ist für die Vorab-beta-Version und dient zu der technischen Umsetzung. Der Port 56002 steht für die alpha-Version, welche die neusten Funktionalitäten zur Erprobung beinhaltet. 
 
 ### Erstellen von External Task Workern
 
@@ -250,7 +251,7 @@ Start-Events können manuell, bspw. durch ein Skript wie in unserem "Hello World
 ![BPMN-Element: End-Event](images/bpmn-element-event-end.png)
 
 Jeder Prozess besitzt mindestens ein End-Event.
-Mit Erreichen eines End-Events ist die Prozessausführung beendet.
+Mit Erreichen eines End-Events ist die Prozessausführung beendet. Es gibt noch viele andere BPMN-Elemente. Einen Gesamtüberblick über die weiteren BPMN-Elemente können Sie [hier](https://github.com/atlas-engine/ContributionGuidelines/blob/develop/docs/getting_started/bpmn_elements.md) verschaffen.
 
 ### ProcessEngine: Clients in vielen Programmiersprachen und eine standardisierte JSON-API
 
