@@ -83,7 +83,15 @@ Anschließend kann das Diagramm per Klick auf "Run" ausgeführt werden (ebenfall
 
 ![BPMN Studio: Ausführen per Klick](images/bpmn-studio-design-play.png)
 
-Prozesse können mit individuellen Parametern gestartet werden.
+Prozesse können mit individuellen Parametern gestartet werden. An exklusives Gateway kann ein Parameter übergeben werden, um das Prozessmodell auf einem bestimmten Pfad zu leiten. Diese Parameter können als JSON-Format in dem Feld angegeben werden.
+
+Beispielsweise erwartet das Gateway einen Bestellwert, der als Parameter in einem JSON-Format angegeben wird:
+```json
+{
+  "shoppingCardAmount": 100
+}
+```
+Mit dem Wert von mindestens 100 EUR wird der Prozess durch den ersten Sequenzfluss fortgesetzt. Andernfalls wird der Pfad genommen, der durch den zweiten Squenzfluss folgt.
 
 ![BPMN Studio: Ausführen mit individuellen Startparametern](images/bpmn-studio-inspect-custom-start.png)
 

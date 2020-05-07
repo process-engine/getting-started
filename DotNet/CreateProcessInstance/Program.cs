@@ -17,7 +17,7 @@
 
         private static async Task StartNewProcessInstance() 
         {
-            var client = new ProcessEngineClient("http://localhost:8000");
+            var client = new ProcessEngineClient("http://localhost:56000");
 
             var request = new ProcessStartRequest<StartPayload>();
             request.Payload.ShoppingCardAmount = 1000;
