@@ -131,7 +131,7 @@ internal class Program
     }
 }
 ```
-Standardmäßig wird der Prozess auf Port 56000 gestartet. Dieser Port steht für die stable-Version, der für den Kunden bereitgestellt ist. Der Port 56001 ist für die Vorab-beta-Version und dient zu der technischen Umsetzung. Der Port 56002 steht für die alpha-Version, welche die neusten Funktionalitäten zur Erprobung beinhaltet. 
+Standardmäßig wird der Prozess auf Port 56000 gestartet. Dieser Port steht für die stable-Version der ProcessEngine, die als offiziellen "Release" bereitgestellt ist. Der Port 56001 ist für die Beta-Version, die zwar schon in seinen Grundfunktionen nutzbar ist, jedoch noch nicht vollständig auf Fehler getestet worden ist. Der Port 56002 wird in der Alpha-Version genutzt, welche die neusten Funktionalitäten zur experimentellen Erprobung beinhaltet. 
 
 ### Erstellen von External Task Workern
 
