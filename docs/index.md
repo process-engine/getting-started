@@ -91,7 +91,7 @@ Beispielsweise erwartet das Gateway einen Bestellwert, der als Parameter in eine
   "shoppingCardAmount": 100
 }
 ```
-Mit dem Wert von mindestens 100 EUR wird der Prozess durch den ersten Sequenzfluss fortgesetzt. Andernfalls wird der Pfad genommen, der durch den zweiten Squenzfluss folgt.
+Mit dem Wert von mindestens 100 EUR wird der Prozess durch den unteren Sequenzfluss fortgesetzt. Andernfalls wird der Pfad genommen, der durch den oberen Squenzfluss folgt.
 
 ![BPMN Studio: Ausführen mit individuellen Startparametern](images/bpmn-studio-inspect-custom-start.png)
 
