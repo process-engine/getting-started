@@ -83,7 +83,7 @@ Anschließend kann das Diagramm per Klick auf "Run" ausgeführt werden (ebenfall
 
 ![BPMN Studio: Ausführen per Klick](images/bpmn-studio-design-play.png)
 
-Prozesse können mit individuellen Parametern gestartet werden. An exklusives Gateway kann ein Parameter übergeben werden, um das Prozessmodell auf einem bestimmten Pfad zu leiten. Diese Parameter können als JSON-Format in dem Feld angegeben werden.
+Prozesse können und müssen in gewissen Fällen mit individuellen Parametern gestartet werden. In diesem Beispiel wird erwartet, dass die Eigenschaft "shoppingCardAmount" vom Aufrufer vorgegeben wird. Die Eigenschaft wird an einem exklusiven Gateway ausgewertet, um das Prozessmodell auf einem bestimmten Pfad zu leiten. Diese Parameter können im JSON-Format in dem Feld angegeben werden.
 
 Beispielsweise erwartet das Gateway einen Bestellwert, der als Parameter in einem JSON-Format angegeben wird:
 ```json
