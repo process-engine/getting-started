@@ -99,7 +99,7 @@ Neben der Steuerung von Prozessen mit Hilfe des BPMN Studios lassen sich die gez
 
 Die Steuerung des Diagramms aus einem Skript heraus ist denkbar einfach.
 
-Wie weiter oben bereits angedeutet, lassen sich Prozesse nach dem Deployment (das muss mit BPMN Studio erfolgen) mit Hilfe des [`ProcessEngineClient`](https://github.com/process-engine/getting-started/tree/develop/DotNet) starten:
+Wie weiter oben bereits angedeutet, lassen sich Prozesse nach dem Deployment (das muss mit BPMN Studio erfolgen) mit Hilfe des [`ProcessEngineClient`](https://github.com/process-engine/getting-started/tree/develop/DotNet/CreateProcessInstance) starten:
 
 ```csharp
 // C#
