@@ -70,7 +70,7 @@ Eine Workflow-Engine ermöglicht, Diagramme wie dieses direkt auszuführen und s
 ### Steuerung per BPMN Studio
 
 Zunächst müssen sie BPMN Studio herunterladen, anschließend das [Diagramm](https://github.com/process-engine/getting-started/tree/develop/Prozesse) herunterladen.
-Wenn Sie das Studio starten, wird automatisch eine ProcessEngine-Server-Instanz gestartet.
+Wenn Sie das Studio starten, wird automatisch im Hintergrund eine ProcessEngine-Server-Instanz gestartet.
 
 ![BPMN Studio: Design-Modus](images/bpmn-studio-design.png)
 
