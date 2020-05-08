@@ -139,7 +139,10 @@ internal class Program
     }
 }
 ```
-Standardmäßig wird der Prozess auf Port 56000 gestartet. Dieser Port steht für die stable-Version der ProcessEngine, die als offizielles "Release" bereitgestellt wird. Der Port 56001 ist für die Beta-Version, die zwar schon in seinen Grundfunktionen nutzbar ist, jedoch noch nicht vollständig auf Fehler getestet worden ist. Der Port 56002 wird in der Alpha-Version genutzt, welche die neusten Funktionalitäten zur experimentellen Erprobung beinhaltet. 
+Der Port ist für die Instanz der ProcessEngine, die im BPMN Studio gestartet wird:
+
+* mit der reguläre "stable" Version startet das Studio auf Port 56000 eine ProcessEngine-Server-Instanz in neuster stabiler Version.
+* Mit der *Beta*-Version startet das Studio auf Port 56100 eine ProcessEngine-Server-Instanz in neuster *Beta*-Version.
 
 ### Erstellen von External Task Workern
 
