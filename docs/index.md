@@ -141,7 +141,7 @@ internal class Program
 ```
 Der Port ist für die Instanz der ProcessEngine, die im BPMN Studio gestartet wird:
 
-* mit der reguläre "stable" Version startet das Studio auf Port 56000 eine ProcessEngine-Server-Instanz in neuster stabiler Version.
+* Mit der regulären "stable" Version startet das Studio auf Port 56000 eine ProcessEngine-Server-Instanz in der aktuell stabilen Version.
 * Mit der *Beta*-Version startet das Studio auf Port 56100 eine ProcessEngine-Server-Instanz in neuster *Beta*-Version.
 
 ### Erstellen von External Task Workern
