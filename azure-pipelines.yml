@@ -17,13 +17,13 @@ steps:
   displayName: 'Install Node.js'
 
 - script: npm install
-  workingDirectory: JavaScript/CreateProcessInstance
+  workingDirectory: TypeScript/CreateProcessInstance
   displayName: 'npm install'
 
 # - script: npm run build
-#   workingDirectory: JavaScript/CreateProcessInstance
+#   workingDirectory: TypeScript/CreateProcessInstance
 #   displayName: 'npm run build'
 
 # - script: npm test
-#   workingDirectory: JavaScript/CreateProcessInstance
+#   workingDirectory: TypeScript/CreateProcessInstance
 #   displayName: 'npm test'
