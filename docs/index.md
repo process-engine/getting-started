@@ -1,21 +1,21 @@
 # Getting Started
 
-ProcessEngine und BPMN Studio bilden eine verteilte, quelloffene Laufzeit- und Entwicklungsumgebung für BPMN-basierte Geschäftsprozesse.
+AtlasEngine und BPMN Studio bilden eine verteilte, quelloffene Laufzeit- und Entwicklungsumgebung für BPMN-basierte Geschäftsprozesse.
 
 ![BPMN Studio: Start-Screen](images/bpmn-studio-empty-state.png)
 
-## BPMN Studio und die ProcessEngine
+## BPMN Studio und die AtlasEngine
 
-ProcessEngine.io ist die Workflow-Engine von [5Minds](https://5minds.de).
+AtlasEngine.io ist die Workflow-Engine von [5Minds](https://5minds.de).
 
-Im Gegensatz zu vielen anderen Lösungen in diesem Bereich ist ProcessEngine quelloffen und bietet mit BPMN Studio eine integrierte Entwicklungsumgebung zum grafischen Entwerfen **und** Ausführen von Prozessen.
+Im Gegensatz zu vielen anderen Lösungen in diesem Bereich ist AtlasEngine quelloffen und bietet mit BPMN Studio eine integrierte Entwicklungsumgebung zum grafischen Entwerfen **und** Ausführen von Prozessen.
 
-ProcessEngine.io unterstützt somit eine zielgerichtete, iterative Entwicklung und Sie können sich auf das konzentrieren, was zählt: **Ihr Business und Ihre Nutzer.**
+AtlasEngine.io unterstützt somit eine zielgerichtete, iterative Entwicklung und Sie können sich auf das konzentrieren, was zählt: **Ihr Business und Ihre Nutzer.**
 
-![BPMN Studio: Design-Modus](images/bpmn-studio-design.png)
+![BPMN Studio: Design-Modus](images/bpmn-studio-design2.png)
 
 Mit BPMN Studio kann der Benutzer nicht nur Prozesse durchdenken, entwerfen und validieren, sondern sie auch direkt in BPMN Studio ausführen.
-BPMN Studio bringt hierzu eine integrierte ProcessEngine mit, welche automatisch gestartet wird und es jedem ermöglicht, seine Prozesse auch ohne Serverlandschaft auszuführen.
+BPMN Studio bringt hierzu eine integrierte AtlasEngine mit, welche automatisch gestartet wird und es jedem ermöglicht, seine Prozesse auch ohne Serverlandschaft auszuführen.
 
 
 ## Das "Hello World" der digitalen Transformation
@@ -41,7 +41,7 @@ In BPMN Studio lassen sich diese Eigenschaften bearbeiten:
 ![BPMN Studio: Design-Modus](images/bpmn-studio-hello-world.png)
 
 Doch die Prozesse im eigenen Unternehmen sind natürlich mehr als ein Start-Aufruf.
-Um die ProcessEngine und ihre Vorzüge besser darstellen zu können, wollen wir daher ein Beispiel aus dem Bereich E-Commerce aufgreifen:
+Um die AtlasEngine und ihre Vorzüge besser darstellen zu können, wollen wir daher ein Beispiel aus dem Bereich E-Commerce aufgreifen:
 
 **Der Online-Shop**
 
@@ -63,18 +63,18 @@ Nehmen Sie folgende Kette an Anforderungen aus einer E-Mail-Konversation:
 
 Nach Erstellen des Prozessdiagramms sehen wir, dass die scheinbar widersprüchlichen Anforderungen weniger konfus sind als gedacht:
 
-![Prozess für Aktivierungs-E-Mails](images/Prozess-Aktivierungs-E-Mails.png)
+![Prozess für Aktivierungs-E-Mails](images/Prozess-Aktivierungs-E-Mails2.png)
 
 Eine Workflow-Engine ermöglicht, Diagramme wie dieses direkt auszuführen und so zum einen die Abläufe mit allen im Team zu diskutieren (insbesondere den Fachexperten, die nicht zwingenderweise Techniker sind!) sowie Unterschiede zwischen der Dokumentation und dem Programmcode zu vermeiden.
 
 ### Steuerung per BPMN Studio
 
 Zunächst müssen sie [BPMN Studio](https://www.process-engine.io/downloads) und das [Diagramm](https://github.com/process-engine/getting-started/tree/develop/Prozesse) herunterladen.
-Wenn Sie das Studio starten, wird automatisch im Hintergrund eine ProcessEngine-Server-Instanz gestartet.
+Wenn Sie das Studio starten, wird automatisch im Hintergrund eine AtlasEngine-Server-Instanz gestartet.
 
-![BPMN Studio: Design-Modus](images/bpmn-studio-design.png)
+![BPMN Studio: Design-Modus](images/bpmn-studio-design2.png)
 
-Zum Ausführen des Diagramms müssen wir ein Deployment auf diese interne ProcessEngine vornehmen.
+Zum Ausführen des Diagramms müssen wir ein Deployment auf diese interne AtlasEngine vornehmen.
 Dies geschieht durch einen Klick auf "Deploy to ProcessEngine" (in der Toolbar, oben rechts).
 
 ![BPMN Studio: Deployment per Klick](images/bpmn-studio-design-deploy.png)
@@ -93,13 +93,13 @@ In diesem konkreten Beispiel wird der Parameter folgendermaßen angegeben:
 ```
 Mit dem Wert von mindestens 100 EUR wird der Prozess durch den unteren Sequenzfluss fortgesetzt. Andernfalls wird der Pfad genommen, der durch den oberen Squenzfluss folgt.
 
-![BPMN Studio: Ausführen mit individuellen Startparametern](images/bpmn-studio-inspect-custom-start.png)
+![BPMN Studio: Ausführen mit individuellen Startparametern](images/bpmn-studio-inspect-custom-start2.png)
 
 Während der Ausführung können Prozesse im sog. "Live Execution Tracker" analysiert werden.
 
-![BPMN Studio: Live Execution Tracker](images/bpmn-studio-inspect-let.png)
+![BPMN Studio: Live Execution Tracker](images/bpmn-studio-inspect-let2.png)
 
-Neben der Steuerung von Prozessen mit Hilfe des BPMN Studios lassen sich die gezeigten Funktionen natürlich auch durch Skripte über die ProcessEngine API automatisieren.
+Neben der Steuerung von Prozessen mit Hilfe des BPMN Studios lassen sich die gezeigten Funktionen natürlich auch durch Skripte über die AtlasEngine API automatisieren.
 
 ### Steuerung per Skript
 
@@ -111,45 +111,45 @@ Wie weiter oben bereits angedeutet, lassen sich Prozesse nach dem Deployment (da
 
 ```csharp
 // C#
-internal class Program
-{
-    private static void Main(string[] args)
+class Program
     {
-        StartNewProcessInstance().GetAwaiter().GetResult();
+        private static void Main(string[] args)
+        {
+            StartNewProcessInstance().GetAwaiter().GetResult();
+        }
+
+        private static async Task StartNewProcessInstance()
+        {
+            var addressOfAtlasEngine = new Uri("http://localhost:56100");
+            var client = ApiClientFactory.CreateProcessControlApiClient(addressOfAtlasEngine);
+
+            var startToken = new { cartAmount = 10001, email = "as@ds.de"};
+
+            Console.WriteLine("Prozess 'Aktivierungs-E-Mails-Prozess' mit Start-Event 'StartEvent' und ohne Warten auf die Response gestartet.");
+
+            await client.StartProcessInstanceAsync("Aktivierungs-E-Mails-Prozess", "StartEvent", initialToken: startToken);
+
+            Console.WriteLine("Prozess 'Aktivierungs-E-Mails-Prozess' mit End-Event beendet");
+
+            Console.WriteLine("Prozess 'Aktivierungs-E-Mails-Prozess' mit Start-Event 'StartEvent' und Warten auf die Response gestartet .");
+
+            var response = await client.ExecuteProcessInstanceAsync("Aktivierungs-E-Mails-Prozess", "StartEvent", initialToken: startToken);
+
+            Console.WriteLine($"Prozess 'Aktivierungs-E-Mails-Prozess' mit End-Event beendet. Payload {response.TokenPayload.RawPayload}");
+        }
     }
-
-    private static async Task StartNewProcessInstance()
-    {
-        var client = new ProcessEngineClient("http://localhost:8000");
-
-        var request = new ProcessStartRequest<StartPayload>();
-        request.Payload.ShoppingCardAmount = 1000;
-
-        Console.WriteLine("Prozess 'Benutzeraktivierung' mit Start-Event 'StartAktivierung' gestartet.");
-
-        var result = await client.StartProcessInstance<StartPayload, object>(
-            "Benutzeraktivierung",
-            "StartAktivierung",
-            request,
-            "EndeAktivierung");
-
-        Console.WriteLine($"Prozess beendet (CorrelationId: '{result.CorrelationId}').");
-        Console.Write("Daten: ");
-        Console.WriteLine(result.Payload);
-    }
-}
 ```
-Der Port ist für die Instanz der ProcessEngine, die im BPMN Studio gestartet wird:
+Der Port ist für die Instanz der AtlasEngine, die im BPMN Studio gestartet wird:
 
-* Mit der regulären "stable" Version startet das Studio auf Port 56000 eine ProcessEngine-Server-Instanz in der aktuell stabilen Version.
-* Mit der *Beta*-Version startet das Studio auf Port 56100 eine ProcessEngine-Server-Instanz in der aktuellen *Beta*-Version.
+* Mit der regulären "stable" Version startet das Studio auf Port 56000 eine AtlasEngine-Server-Instanz in der aktuell stabilen Version.
+* Mit der *Beta*-Version startet das Studio auf Port 56100 eine AtlasEngine-Server-Instanz in der aktuellen *Beta*-Version.
 
 ### Erstellen von External Task Workern
 
 Das "External Task Pattern" sieht vor, dass zu erledigende Arbeiten in einem vereinheitlichten Arbeitsvorrat hinterlegt werden.
 Dort können sie von "External Task Workern" abgeholt und bearbeitet werden.
 Durch diese Entkopplung können die Worker in jeder beliebigen Programmiersprache implementiert werden.
-Der zuständige Worker hinterlegt anschließend das Arbeitsergebnis im Arbeitsvorrat, wo die ProcessEngine es abholen und mit der Prozessausführung fortführen kann.
+Der zuständige Worker hinterlegt anschließend das Arbeitsergebnis im Arbeitsvorrat, wo die AtlasEngine es abholen und mit der Prozessausführung fortführen kann.
 
 Das Pattern stellt somit eine Alternative zur Anbindung von REST-Service-Endpunkten dar.
 
