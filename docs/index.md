@@ -163,29 +163,29 @@ Ein ExternalTaskWorker für den External Task "Aktivierungs-E-Mail versenden" au
 ```csharp
 // C#
 class Program
+{
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            var hostBuilder = CreateHostBuilder(args);
-            var host = hostBuilder.Build();
+    var hostBuilder = CreateHostBuilder(args);
+    var host = hostBuilder.Build();
             
-            var addressOfAtlasEngine = new Uri("http://localhost:56100");
-            var client = new ExternalTaskClient(addressOfAtlasEngine, logger:ConsoleLogger.Default);
+    var addressOfAtlasEngine = new Uri("http://localhost:56100");
+    var client = new ExternalTaskClient(addressOfAtlasEngine, logger:ConsoleLogger.Default);
 
-             // Create a new typed worker using a factory method:
-            client.SubscribeToExternalTaskTopic(
-             "Send.DiscountCode",
-             p => p.UseHandlerFactory<SendDiscountCodeHandler, SendDiscountCodePayload, SendDiscountCodeResult>(() => new SendDiscountCodeHandler()));
+    // Create a new typed worker using a factory method:
+    client.SubscribeToExternalTaskTopic(
+    "Send.DiscountCode",
+    p => p.UseHandlerFactory<SendDiscountCodeHandler, SendDiscountCodePayload, SendDiscountCodeResult>(() => new SendDiscountCodeHandler()));
 
-            client.StartAsync();
+    client.StartAsync();
 
-            host.Run();
-            Console.WriteLine("Started");
-            Console.ReadKey(true);
+    host.Run();
+    Console.WriteLine("Started");
+    console.ReadKey(true);
 
-            client.Stop();
-        }
-    }    
+    client.Stop();
+    }
+}    
 ```
 
 
