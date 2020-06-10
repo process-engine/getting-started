@@ -166,26 +166,27 @@ class Program
 {
     static void Main(string[] args)
     {
-    var hostBuilder = CreateHostBuilder(args);
-    var host = hostBuilder.Build();
-            
-    var addressOfAtlasEngine = new Uri("http://localhost:56100");
-    var client = new ExternalTaskClient(addressOfAtlasEngine, logger:ConsoleLogger.Default);
+        var hostBuilder = CreateHostBuilder(args);
+        var host = hostBuilder.Build();
 
-    // Create a new typed worker using a factory method:
-    client.SubscribeToExternalTaskTopic(
-    "Send.DiscountCode",
-    p => p.UseHandlerFactory<SendDiscountCodeHandler, SendDiscountCodePayload, SendDiscountCodeResult>(() => new SendDiscountCodeHandler()));
+        var addressOfAtlasEngine = new Uri("http://localhost:56100");
+        var client = new ExternalTaskClient(addressOfAtlasEngine, logger: ConsoleLogger.Default);
 
-    client.StartAsync();
+        // Create a new typed worker using a factory method:
+        client.SubscribeToExternalTaskTopic(
+            "Send.DiscountCode",
+                p => p.UseHandlerFactory<SendDiscountCodeHandler, SendDiscountCodePayload, 
+                SendDiscountCodeResult>(() => new SendDiscountCodeHandler()));
 
-    host.Run();
-    Console.WriteLine("Started");
-    console.ReadKey(true);
+        client.StartAsync();
 
-    client.Stop();
+        host.Run();
+        Console.WriteLine("Started");
+        Console.ReadKey(true);
+
+        client.Stop();
     }
-}    
+}   
 ```
 
 
