@@ -6,11 +6,11 @@ AtlasEngine und BPMN Studio bilden eine verteilte, quelloffene Laufzeit- und Ent
 
 ## BPMN Studio und die AtlasEngine
 
-AtlasEngine.io ist die Workflow-Engine von [5Minds](https://5minds.de).
+Die AtlasEngine ist die Workflow-Engine von [5Minds](https://5minds.de).
 
 Im Gegensatz zu vielen anderen Lösungen in diesem Bereich ist AtlasEngine quelloffen und bietet mit BPMN Studio eine integrierte Entwicklungsumgebung zum grafischen Entwerfen **und** Ausführen von Prozessen.
 
-AtlasEngine.io unterstützt somit eine zielgerichtete, iterative Entwicklung und Sie können sich auf das konzentrieren, was zählt: **Ihr Business und Ihre Nutzer.**
+Die AtlasEngine unterstützt somit eine zielgerichtete, iterative Entwicklung und Sie können sich auf das konzentrieren, was zählt: **Ihr Business und Ihre Nutzer.**
 
 ![BPMN Studio: Design-Modus](images/bpmn-studio-design2.png)
 
@@ -107,7 +107,7 @@ Neben der Steuerung von Prozessen mit Hilfe des BPMN Studios lassen sich die gez
 
 Die Steuerung des Diagramms aus einem Skript heraus ist denkbar einfach.
 
-Wie weiter oben bereits angedeutet, lassen sich Prozesse nach dem Deployment (das muss mit BPMN Studio erfolgen) mit Hilfe des [`ProcessEngineClient`](https://github.com/process-engine/getting-started/tree/develop/DotNet/CreateProcessInstance) starten:
+Wie weiter oben bereits angedeutet, lassen sich Prozesse nach dem Deployment (das muss mit BPMN Studio erfolgen) mit Hilfe des [`DotNet-Client der AtlasEngine`](https://github.com/atlas-engine/discount-example/tree/feature/update_gettingStarted/Dotnet) starten:
 
 ```csharp
 // C#
@@ -162,37 +162,29 @@ Ein ExternalTaskWorker für den External Task "Aktivierungs-E-Mail versenden" au
 
 ```csharp
 // C#
-internal class Program
-{
-    private static void Main(string[] args)
+class Program
     {
-        RunSampleExternalTaskWorker().GetAwaiter().GetResult();
-    }
+        static void Main(string[] args)
+        {
+            var hostBuilder = CreateHostBuilder(args);
+            var host = hostBuilder.Build();
+            
+            var addressOfAtlasEngine = new Uri("http://localhost:56100");
+            var client = new ExternalTaskClient(addressOfAtlasEngine, logger:ConsoleLogger.Default);
 
-    private static async Task RunSampleExternalTaskWorker()
-    {
-        var client = new ProcessEngineClient("http://localhost:8000");
+             // Create a new typed worker using a factory method:
+            client.SubscribeToExternalTaskTopic(
+             "Send.DiscountCode",
+             p => p.UseHandlerFactory<SendDiscountCodeHandler, SendDiscountCodePayload, SendDiscountCodeResult>(() => new SendDiscountCodeHandler()));
 
-        await client.WaitForHandle<TestPayload>("AktivierungsemailSenden", async (externalTask) => {
-            var result = await DoSomeLongWork(externalTask.Payload);
+            client.StartAsync();
 
-            var externalTaskFinished = new ExternalTaskFinished<TestResult>(externalTask.Id, result);
+            host.Run();
+            Console.WriteLine("Started");
+            Console.ReadKey(true);
 
-            return externalTaskFinished;
-        });
-    }
-
-    private async static Task<TestResult> DoSomeLongWork(TestPayload payload)
-    {
-        var result = new TestResult();
-        result.ShoppingCardAmount = payload.ShoppingCardAmount;
-
-        // zur Simulation einer rechenintensiven Aufgabe
-        await Task.Delay(10000);
-
-        return result;
-    }
-}
+            client.Stop();
+        }
 ```
 
 
