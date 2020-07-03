@@ -1,21 +1,21 @@
 # Getting Started
 
-ProcessEngine und BPMN Studio bilden eine verteilte, quelloffene Laufzeit- und Entwicklungsumgebung für BPMN-basierte Geschäftsprozesse.
+AtlasEngine und BPMN Studio bilden eine verteilte, quelloffene Laufzeit- und Entwicklungsumgebung für BPMN-basierte Geschäftsprozesse.
 
 ![BPMN Studio: Start-Screen](images/bpmn-studio-empty-state.png)
 
-## BPMN Studio und die ProcessEngine
+## BPMN Studio und die AtlasEngine
 
-ProcessEngine.io ist die Workflow-Engine von [5Minds](https://5minds.de).
+Die AtlasEngine ist die Workflow-Engine von [5Minds](https://5minds.de).
 
-Im Gegensatz zu vielen anderen Lösungen in diesem Bereich ist ProcessEngine quelloffen und bietet mit BPMN Studio eine integrierte Entwicklungsumgebung zum grafischen Entwerfen **und** Ausführen von Prozessen.
+Im Gegensatz zu vielen anderen Lösungen in diesem Bereich ist AtlasEngine quelloffen und bietet mit BPMN Studio eine integrierte Entwicklungsumgebung zum grafischen Entwerfen **und** Ausführen von Prozessen.
 
-ProcessEngine.io unterstützt somit eine zielgerichtete, iterative Entwicklung und Sie können sich auf das konzentrieren, was zählt: **Ihr Business und Ihre Nutzer.**
+Die AtlasEngine unterstützt somit eine zielgerichtete, iterative Entwicklung und Sie können sich auf das konzentrieren, was zählt: **Ihr Business und Ihre Nutzer.**
 
-![BPMN Studio: Design-Modus](images/bpmn-studio-design.png)
+![BPMN Studio: Design-Modus](images/bpmn-studio-design2.png)
 
 Mit BPMN Studio kann der Benutzer nicht nur Prozesse durchdenken, entwerfen und validieren, sondern sie auch direkt in BPMN Studio ausführen.
-BPMN Studio bringt hierzu eine integrierte ProcessEngine mit, welche automatisch gestartet wird und es jedem ermöglicht, seine Prozesse auch ohne Serverlandschaft auszuführen.
+BPMN Studio bringt hierzu eine integrierte AtlasEngine mit, welche automatisch gestartet wird und es jedem ermöglicht, seine Prozesse auch ohne Serverlandschaft auszuführen.
 
 
 ## Das "Hello World" der digitalen Transformation
@@ -41,7 +41,7 @@ In BPMN Studio lassen sich diese Eigenschaften bearbeiten:
 ![BPMN Studio: Design-Modus](images/bpmn-studio-hello-world.png)
 
 Doch die Prozesse im eigenen Unternehmen sind natürlich mehr als ein Start-Aufruf.
-Um die ProcessEngine und ihre Vorzüge besser darstellen zu können, wollen wir daher ein Beispiel aus dem Bereich E-Commerce aufgreifen:
+Um die AtlasEngine und ihre Vorzüge besser darstellen zu können, wollen wir daher ein Beispiel aus dem Bereich E-Commerce aufgreifen:
 
 **Der Online-Shop**
 
@@ -63,18 +63,18 @@ Nehmen Sie folgende Kette an Anforderungen aus einer E-Mail-Konversation:
 
 Nach Erstellen des Prozessdiagramms sehen wir, dass die scheinbar widersprüchlichen Anforderungen weniger konfus sind als gedacht:
 
-![Prozess für Aktivierungs-E-Mails](images/Prozess-Aktivierungs-E-Mails.png)
+![Prozess für Aktivierungs-E-Mails](images/Prozess-Aktivierungs-E-Mails2.png)
 
 Eine Workflow-Engine ermöglicht, Diagramme wie dieses direkt auszuführen und so zum einen die Abläufe mit allen im Team zu diskutieren (insbesondere den Fachexperten, die nicht zwingenderweise Techniker sind!) sowie Unterschiede zwischen der Dokumentation und dem Programmcode zu vermeiden.
 
 ### Steuerung per BPMN Studio
 
 Zunächst müssen sie [BPMN Studio](https://www.process-engine.io/downloads) und das [Diagramm](https://github.com/process-engine/getting-started/tree/develop/Prozesse) herunterladen.
-Wenn Sie das Studio starten, wird automatisch im Hintergrund eine ProcessEngine-Server-Instanz gestartet.
+Wenn Sie das Studio starten, wird automatisch im Hintergrund eine AtlasEngine-Server-Instanz gestartet.
 
-![BPMN Studio: Design-Modus](images/bpmn-studio-design.png)
+![BPMN Studio: Design-Modus](images/bpmn-studio-design2.png)
 
-Zum Ausführen des Diagramms müssen wir ein Deployment auf diese interne ProcessEngine vornehmen.
+Zum Ausführen des Diagramms müssen wir ein Deployment auf diese interne AtlasEngine vornehmen.
 Dies geschieht durch einen Klick auf "Deploy to ProcessEngine" (in der Toolbar, oben rechts).
 
 ![BPMN Studio: Deployment per Klick](images/bpmn-studio-design-deploy.png)
@@ -93,13 +93,13 @@ In diesem konkreten Beispiel wird der Parameter folgendermaßen angegeben:
 ```
 Mit dem Wert von mindestens 100 EUR wird der Prozess durch den unteren Sequenzfluss fortgesetzt. Andernfalls wird der Pfad genommen, der durch den oberen Squenzfluss folgt.
 
-![BPMN Studio: Ausführen mit individuellen Startparametern](images/bpmn-studio-inspect-custom-start.png)
+![BPMN Studio: Ausführen mit individuellen Startparametern](images/bpmn-studio-inspect-custom-start2.png)
 
 Während der Ausführung können Prozesse im sog. "Live Execution Tracker" analysiert werden.
 
-![BPMN Studio: Live Execution Tracker](images/bpmn-studio-inspect-let.png)
+![BPMN Studio: Live Execution Tracker](images/bpmn-studio-inspect-let2.png)
 
-Neben der Steuerung von Prozessen mit Hilfe des BPMN Studios lassen sich die gezeigten Funktionen natürlich auch durch Skripte über die ProcessEngine API automatisieren.
+Neben der Steuerung von Prozessen mit Hilfe des BPMN Studios lassen sich die gezeigten Funktionen natürlich auch durch Skripte über die AtlasEngine API automatisieren.
 
 ### Steuerung per Skript
 
@@ -107,49 +107,49 @@ Neben der Steuerung von Prozessen mit Hilfe des BPMN Studios lassen sich die gez
 
 Die Steuerung des Diagramms aus einem Skript heraus ist denkbar einfach.
 
-Wie weiter oben bereits angedeutet, lassen sich Prozesse nach dem Deployment (das muss mit BPMN Studio erfolgen) mit Hilfe des [`ProcessEngineClient`](https://github.com/process-engine/getting-started/tree/develop/DotNet/CreateProcessInstance) starten:
+Wie weiter oben bereits angedeutet, lassen sich Prozesse nach dem Deployment (das muss mit BPMN Studio erfolgen) mit Hilfe des [`DotNet-Client der AtlasEngine`](https://github.com/atlas-engine/discount-example/tree/feature/update_gettingStarted/Dotnet) starten:
 
 ```csharp
 // C#
-internal class Program
-{
-    private static void Main(string[] args)
+class Program
     {
-        StartNewProcessInstance().GetAwaiter().GetResult();
+        private static void Main(string[] args)
+        {
+            StartNewProcessInstance().GetAwaiter().GetResult();
+        }
+
+        private static async Task StartNewProcessInstance()
+        {
+            var addressOfAtlasEngine = new Uri("http://localhost:56100");
+            var client = ApiClientFactory.CreateProcessControlApiClient(addressOfAtlasEngine);
+
+            var startToken = new { cartAmount = 10001, email = "as@ds.de"};
+
+            Console.WriteLine("Prozess 'Aktivierungs-E-Mails-Prozess' mit Start-Event 'StartEvent' und ohne Warten auf die Response gestartet.");
+
+            await client.StartProcessInstanceAsync("Aktivierungs-E-Mails-Prozess", "StartEvent", initialToken: startToken);
+
+            Console.WriteLine("Prozess 'Aktivierungs-E-Mails-Prozess' mit End-Event beendet");
+
+            Console.WriteLine("Prozess 'Aktivierungs-E-Mails-Prozess' mit Start-Event 'StartEvent' und Warten auf die Response gestartet .");
+
+            var response = await client.ExecuteProcessInstanceAsync("Aktivierungs-E-Mails-Prozess", "StartEvent", initialToken: startToken);
+
+            Console.WriteLine($"Prozess 'Aktivierungs-E-Mails-Prozess' mit End-Event beendet. Payload {response.TokenPayload.RawPayload}");
+        }
     }
-
-    private static async Task StartNewProcessInstance()
-    {
-        var client = new ProcessEngineClient("http://localhost:8000");
-
-        var request = new ProcessStartRequest<StartPayload>();
-        request.Payload.ShoppingCardAmount = 1000;
-
-        Console.WriteLine("Prozess 'Benutzeraktivierung' mit Start-Event 'StartAktivierung' gestartet.");
-
-        var result = await client.StartProcessInstance<StartPayload, object>(
-            "Benutzeraktivierung",
-            "StartAktivierung",
-            request,
-            "EndeAktivierung");
-
-        Console.WriteLine($"Prozess beendet (CorrelationId: '{result.CorrelationId}').");
-        Console.Write("Daten: ");
-        Console.WriteLine(result.Payload);
-    }
-}
 ```
-Der Port ist für die Instanz der ProcessEngine, die im BPMN Studio gestartet wird:
+Der Port ist für die Instanz der AtlasEngine, die im BPMN Studio gestartet wird:
 
-* Mit der regulären "stable" Version startet das Studio auf Port 56000 eine ProcessEngine-Server-Instanz in der aktuell stabilen Version.
-* Mit der *Beta*-Version startet das Studio auf Port 56100 eine ProcessEngine-Server-Instanz in der aktuellen *Beta*-Version.
+* Mit der regulären "stable" Version startet das Studio auf Port 56000 eine AtlasEngine-Server-Instanz in der aktuell stabilen Version.
+* Mit der *Beta*-Version startet das Studio auf Port 56100 eine AtlasEngine-Server-Instanz in der aktuellen *Beta*-Version.
 
 ### Erstellen von External Task Workern
 
 Das "External Task Pattern" sieht vor, dass zu erledigende Arbeiten in einem vereinheitlichten Arbeitsvorrat hinterlegt werden.
 Dort können sie von "External Task Workern" abgeholt und bearbeitet werden.
 Durch diese Entkopplung können die Worker in jeder beliebigen Programmiersprache implementiert werden.
-Der zuständige Worker hinterlegt anschließend das Arbeitsergebnis im Arbeitsvorrat, wo die ProcessEngine es abholen und mit der Prozessausführung fortführen kann.
+Der zuständige Worker hinterlegt anschließend das Arbeitsergebnis im Arbeitsvorrat, wo die AtlasEngine es abholen und mit der Prozessausführung fortführen kann.
 
 Das Pattern stellt somit eine Alternative zur Anbindung von REST-Service-Endpunkten dar.
 
@@ -162,37 +162,31 @@ Ein ExternalTaskWorker für den External Task "Aktivierungs-E-Mail versenden" au
 
 ```csharp
 // C#
-internal class Program
+class Program
 {
-    private static void Main(string[] args)
+    static void Main(string[] args)
     {
-        RunSampleExternalTaskWorker().GetAwaiter().GetResult();
+        var hostBuilder = CreateHostBuilder(args);
+        var host = hostBuilder.Build();
+
+        var addressOfAtlasEngine = new Uri("http://localhost:56100");
+        var client = new ExternalTaskClient(addressOfAtlasEngine, logger: ConsoleLogger.Default);
+
+        // Create a new typed worker using a factory method:
+        client.SubscribeToExternalTaskTopic(
+            "Send.DiscountCode",
+                p => p.UseHandlerFactory<SendDiscountCodeHandler, SendDiscountCodePayload, 
+                SendDiscountCodeResult>(() => new SendDiscountCodeHandler()));
+
+        client.StartAsync();
+
+        host.Run();
+        Console.WriteLine("Started");
+        Console.ReadKey(true);
+
+        client.Stop();
     }
-
-    private static async Task RunSampleExternalTaskWorker()
-    {
-        var client = new ProcessEngineClient("http://localhost:8000");
-
-        await client.WaitForHandle<TestPayload>("AktivierungsemailSenden", async (externalTask) => {
-            var result = await DoSomeLongWork(externalTask.Payload);
-
-            var externalTaskFinished = new ExternalTaskFinished<TestResult>(externalTask.Id, result);
-
-            return externalTaskFinished;
-        });
-    }
-
-    private async static Task<TestResult> DoSomeLongWork(TestPayload payload)
-    {
-        var result = new TestResult();
-        result.ShoppingCardAmount = payload.ShoppingCardAmount;
-
-        // zur Simulation einer rechenintensiven Aufgabe
-        await Task.Delay(10000);
-
-        return result;
-    }
-}
+}   
 ```
 
 
@@ -270,6 +264,51 @@ Die ProcessEngine verfügt über eine standardisierte JSON-API zur Steuerung von
 
 Für die ProcessEngine-API existieren Clients in TypeScript, JavaScript, .NET C# und Python.
 Da es sich um eine offen spezifizierte Schnittstelle handelt, können Clients in weiteren Sprachen mit geringem Aufwand erstellt werden.
+
+## BPMN-Diagramme vergleichen
+
+In diesem Abschnitt beschreiben wir Ihnen, wie Sie BPMN-Diagramme miteinander vergleichen können.
+Im ersten Teil erstellen wir ein BPMN-Prozess und stellen dessen Änderungsverlauf visuell dar. Dieser Verlauf verschafft uns einen Überblick über den Fortschritt des Diagramms. Anhand der farblichen Darstellung der Änderungen, können Sie sehen, wie sich der Prozess schrittweise durch Hinzufügen von neuen Elementen entwickelt hat. 
+Im zweiten Teil vergleichen wir zwei Diagramme unabhängig ihrer Modellierung miteinander und zeigen die Unterschiede auf. Diese Unterschiede werden ebenfalls farblich dargestellt.
+
+### Änderungsverlauf eines BPMN-Diagramms
+#### Wie können Sie ein neues BPMN-Diagramm erstellen?
+Im Folgenden erstellen wir ein neues BPMN-Diagramm. Zum Start bietet das BPMN-Studio eine Vorlage mit einem Start- und einem End-Event in einem Prozesspool an (siehe Abbildung 1). 
+
+![BPMN Studio: Diagramm erstellen](images/bpmn-compare-create-diagram.png)
+
+Durch das Klicken der Schaltfläche Show Diff  (unten rechts in der Anwendung) zeigt das Programm die Änderungen des Diagramms im Diff Protokoll an. Da sich bis jetzt keine Änderungen ergeben haben, liefert das Diff Protokoll noch kein Ergebnis (siehe Abbildung 2).
+
+![BPMN Studio: Änderungsverlauf](images/bpmn-compare-change-history.png)
+
+#### Wie können Sie das neu erstellte Diagramm erweitern?
+Das Diagramm erweitern sie, indem sie einen neuen Task hinzufügen (siehe Abbildung 3).
+
+![BPMN Studio: Task hinzufügen](images/bpmn-compare-add-task.png)
+
+Sobald Sie dem Diagramm neue Elemente hinzugefügt haben, können Sie sich die Änderungen unter Show Diff als Protokoll anzeigen lassen (siehe Abbildung 4). In der Abbildung ist das Fenster in vier Bereiche unterteilt. Oben rechts ist  das Diagramm im Anfangszustand. Auf der linken Seite können Sie das Diagramm in der veränderten Version betrachten. Im Bereich unten links stellt das Diagramm die Veränderungen farblich dar. 
+
+Die Farbe symbolisiert die Art der Änderung, die Sie durchgeführt haben, und wird zusätzlich unten links in der Legende angezeigt:
+
+* Hinzugefügt (grün)
+* Entfernt (rot)
+* Geändert (orange)
+* Layout geändert (lila)
+
+Im Bereich unten rechts wird das Protokoll ebenfalls farblich entsprechend der Legende aufgelistet.
+
+![BPMN Studio: Änderungsprotokoll](images/bpmn-compare-view-protocol.png)
+
+### Vergleich von zwei BPMN-Diagrammen
+In Teil 2 vergleichen wir zwei unterschiedliche Diagramme miteinander. Zunächst klicken wir auf die Schaltfläche Show Diff. Ein Fenster öffnet sich zum Vergleich von zwei Diagrammen. Dann wählen wir die Datei aus, mit der wir das aktuelle Diagramm vergleichen wollen (siehe Abbildung 5).
+
+![BPMN Studio: Diagramm auswählen](images/bpmn-compare-choose-a-diagram.png)
+
+Auf dem oberen Bereich der Anwendung sind beide zu vergleichenden Diagramme dargestellt (siehe Abbildung 6). Unterschiede, welche im Diagramm 1 im Vergleich zu Diagramm 2 erkennbar sind, werden unten links farblich dargestellt. 
+
+Pools und Lanes stellen die Verantwortlichkeiten in einem Prozess dar. Ein Pool repräsentiert etwa ein Unternehmen oder eine Organisation. Ein Lane repräsentiert dagegen verschiedene Abteilungen, Rollen oder Personen in einem Prozess und damit die Prozessteilnehmern bzw. “Participant”. In diesem Fall haben wir das Layout des “Participant” vergrößert und ist in der Farbe Lila gekennzeichnet. Darüber hinaus haben wir weitere Elemente hinzugefügt, die in der Farbe grün erkennbar sind. Die zu unterscheidenden Elemente werden unten rechts im Protokoll farblich dokumentiert.
+
+![BPMN Studio: Farblicher Änderungsverlauf](images/bpmn-compare-protocol-color.png)
 
 ## Philosophie
 
